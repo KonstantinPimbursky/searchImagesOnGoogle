@@ -11,8 +11,8 @@ final class SearchImageController: UIViewController {
     
     // MARK: - Types
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, ImagesCollectionCellModel>
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, ImagesCollectionCellModel>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, SingleImageResult>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, SingleImageResult>
     
     enum Section {
         case main
@@ -22,10 +22,14 @@ final class SearchImageController: UIViewController {
     
     private lazy var mainView = SearchImageView(delegate: self)
     
-    private let collectionModel: ImagesCollectionModel = ImagesCollectionModelImpl()
+    private let serverService = ApiService.shared
+    
+    private var searchResults = ImagesResults(results: [])
     
     private var dataSource: DataSource!
     private var snapshot: DataSourceSnapshot!
+    
+    private var timer: Timer?
     
     // MARK: - Life Cycle
     
@@ -36,7 +40,7 @@ final class SearchImageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImagesCollection()
-        applySnapshot(items: collectionModel.cells)
+        applySnapshot()
     }
     
     // MARK: - Private Methods
@@ -51,17 +55,24 @@ final class SearchImageController: UIViewController {
             collectionView: mainView.imagesCollection,
             cellProvider: { collectionView, indexPath, item in
                 let cell: ImagesCollectionCell = collectionView.dequeueCell(for: indexPath)
-                cell.configure(image: item.image)
+                cell.configure(with: item.thumbnail)
                 return cell
             }
         )
     }
     
-    private func applySnapshot(items: [ImagesCollectionCellModel]) {
+    private func applySnapshot() {
         snapshot = DataSourceSnapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(items)
+        snapshot.appendItems(searchResults.results)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func fetchImages(for searchString: String) {
+        serverService.searchImages(for: searchString) { [weak self] imagesResults in
+            self?.searchResults = imagesResults
+            self?.applySnapshot()
+        }
     }
 }
 
@@ -81,8 +92,25 @@ extension SearchImageController: UICollectionViewDelegate {
     
 }
 
-// MARK: -
+// MARK: - UISearchBarDelegate
 
 extension SearchImageController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        timer?.invalidate()
+//        timer = Timer.scheduledTimer(
+//            withTimeInterval: 2,
+//            repeats: false,
+//            block: { [weak self] _ in
+//                self?.fetchImages(for: searchText)
+//            }
+//        )
+    }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text,
+           !searchText.isEmpty {
+            fetchImages(for: searchText)
+        }
+        searchBar.resignFirstResponder()
+    }
 }

@@ -7,5 +7,6 @@ target 'SearchImagesOnGoogle' do
 
   pod 'R.swift', '5.3.0'
   pod 'SwiftLint'
+  pod 'SDWebImage'
 
 end

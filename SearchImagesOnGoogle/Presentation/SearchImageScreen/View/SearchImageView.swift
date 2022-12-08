@@ -13,14 +13,6 @@ protocol SearchImageViewDelegate: AnyObject {
 
 final class SearchImageView: UIView {
     
-    // MARK: - Constants
-    
-    private enum Constants {
-        static let spacing: CGFloat = 16
-        static let itemWidth: CGFloat = (UIScreen.main.bounds.width - spacing * 3) / 2
-        static let itemHeight: CGFloat = itemWidth
-    }
-    
     // MARK: - Public Properties
     
     public lazy var imagesCollection: UICollectionView = {
@@ -64,26 +56,17 @@ final class SearchImageView: UIView {
     // MARK: - Private Methods
     
     private func createCollectionLayout() -> UICollectionViewCompositionalLayout {
-        let itemWidth = NSCollectionLayoutDimension.absolute(Constants.itemWidth)
-        let itemHeight = NSCollectionLayoutDimension.estimated(50)
+        let itemWidth = NSCollectionLayoutDimension.fractionalWidth(0.5)
+        let itemHeight = NSCollectionLayoutDimension.fractionalWidth(0.5)
         let itemSize = NSCollectionLayoutSize(widthDimension: itemWidth, heightDimension: itemHeight)
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupWidth = NSCollectionLayoutDimension.fractionalWidth(1)
-        let groupHeight = NSCollectionLayoutDimension.estimated(50)
+        let groupHeight = NSCollectionLayoutDimension.fractionalWidth(0.5)
         let groupSize = NSCollectionLayoutSize(widthDimension: groupWidth, heightDimension: groupHeight)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
-        group.interItemSpacing = .fixed(Constants.spacing)
-        
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = Constants.spacing
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: Constants.spacing,
-            leading: Constants.spacing,
-            bottom: Constants.spacing,
-            trailing: Constants.spacing
-        )
 
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
@@ -94,7 +77,7 @@ final class SearchImageView: UIView {
     }
     
     private func setConstraints() {
-        imagesCollection.stretchFullSafelyOn(self)
+        imagesCollection.stretchFullOn(self)
     }
     
     private func setupNavigationBar() {

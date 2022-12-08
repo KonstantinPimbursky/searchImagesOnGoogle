@@ -19,6 +19,10 @@
 		B570AC9D293F08760094FA5D /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570AC9C293F08760094FA5D /* UICollectionView+Extensions.swift */; };
 		B570ACA0293F0A9D0094FA5D /* ImagesCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570AC9F293F0A9D0094FA5D /* ImagesCollectionModel.swift */; };
 		B570ACAC294058010094FA5D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B570ACAB294058010094FA5D /* Localizable.strings */; };
+		B570ACB029405FB80094FA5D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570ACAF29405FB80094FA5D /* NetworkService.swift */; };
+		B5985B202940A82D003F5B0F /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B1F2940A82D003F5B0F /* JSONService.swift */; };
+		B5985B232940A88B003F5B0F /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B222940A88B003F5B0F /* ApiService.swift */; };
+		B5985B252940AAA4003F5B0F /* ApiServiceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B242940AAA4003F5B0F /* ApiServiceModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,10 @@
 		B570AC9C293F08760094FA5D /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		B570AC9F293F0A9D0094FA5D /* ImagesCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionModel.swift; sourceTree = "<group>"; };
 		B570ACAB294058010094FA5D /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B570ACAF29405FB80094FA5D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B5985B1F2940A82D003F5B0F /* JSONService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
+		B5985B222940A88B003F5B0F /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		B5985B242940AAA4003F5B0F /* ApiServiceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,7 @@
 			children = (
 				B570AC95293F05720094FA5D /* Common */,
 				B570AC50293DBFF00094FA5D /* Presentation */,
+				B570ACAD29405F740094FA5D /* Services */,
 				B570AC4F293DBF870094FA5D /* Sources */,
 				B570AC4E293DBF7E0094FA5D /* UIApllication */,
 				B570AC48293DB4510094FA5D /* Info.plist */,
@@ -208,6 +217,33 @@
 				B570ACAB294058010094FA5D /* Localizable.strings */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		B570ACAD29405F740094FA5D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B5985B212940A85A003F5B0F /* ApiService */,
+				B570ACAE29405F810094FA5D /* NetworkService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B570ACAE29405F810094FA5D /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				B570ACAF29405FB80094FA5D /* NetworkService.swift */,
+				B5985B1F2940A82D003F5B0F /* JSONService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		B5985B212940A85A003F5B0F /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				B5985B222940A88B003F5B0F /* ApiService.swift */,
+				B5985B242940AAA4003F5B0F /* ApiServiceModels.swift */,
+			);
+			path = ApiService;
 			sourceTree = "<group>";
 		};
 		ECF939105B1CBE113EFB6535 /* Frameworks */ = {
@@ -375,9 +411,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B570AC9D293F08760094FA5D /* UICollectionView+Extensions.swift in Sources */,
+				B5985B202940A82D003F5B0F /* JSONService.swift in Sources */,
 				B570AC58293DC0500094FA5D /* SearchImageView.swift in Sources */,
 				B570AC9B293F07670094FA5D /* ImagesCollectionCell.swift in Sources */,
+				B5985B252940AAA4003F5B0F /* ApiServiceModels.swift in Sources */,
 				B570ACA0293F0A9D0094FA5D /* ImagesCollectionModel.swift in Sources */,
+				B570ACB029405FB80094FA5D /* NetworkService.swift in Sources */,
+				B5985B232940A88B003F5B0F /* ApiService.swift in Sources */,
 				B570AC3B293DB4500094FA5D /* AppDelegate.swift in Sources */,
 				B570AC98293F058E0094FA5D /* UIView+Extensions.swift in Sources */,
 				B570AC56293DC0460094FA5D /* SearchImageController.swift in Sources */,
