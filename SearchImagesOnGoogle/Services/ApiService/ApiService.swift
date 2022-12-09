@@ -27,7 +27,7 @@ final class ApiService {
     
     public func searchImages(
         for searchText: String,
-        completion: @escaping (_ imagesResults: ImagesResults) -> Void
+        completion: @escaping (Result<ImagesResults, Error>) -> Void
     ) {
         let parameters = prepareParameters(searchText: searchText)
         guard let url = getSearchUrl(parameters: parameters) else { return }
@@ -36,9 +36,9 @@ final class ApiService {
             case .success(let data):
                 guard let response = self?.jsonService.decodeJSON(type: ImagesResults.self, from: data) else { return }
                 print(response)
-                completion(response)
+                completion(.success(response))
             case .failure(let error):
-                print("Error: \(error)")
+                completion(.failure(error))
             }
         }
     }

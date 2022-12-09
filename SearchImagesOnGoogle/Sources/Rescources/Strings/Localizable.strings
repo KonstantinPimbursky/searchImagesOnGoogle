@@ -9,3 +9,7 @@
 // Search Screen
 
 "searchPlaceholder" = "Search";
+
+// Alerts
+
+"errorTitle" = "Error";

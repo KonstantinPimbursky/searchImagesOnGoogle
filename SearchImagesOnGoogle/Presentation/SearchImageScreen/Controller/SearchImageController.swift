@@ -20,6 +20,8 @@ final class SearchImageController: UIViewController {
     
     // MARK: - Private Properties
     
+    private weak var coordinator: CoordinatorProtocol?
+    
     private lazy var mainView = SearchImageView(delegate: self)
     
     private let serverService = ApiService.shared
@@ -29,7 +31,16 @@ final class SearchImageController: UIViewController {
     private var dataSource: DataSource!
     private var snapshot: DataSourceSnapshot!
     
-    private var timer: Timer?
+    // MARK: - Initializers
+    
+    init(coordinator: CoordinatorProtocol?) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -69,10 +80,20 @@ final class SearchImageController: UIViewController {
     }
     
     private func fetchImages(for searchString: String) {
-        serverService.searchImages(for: searchString) { [weak self] imagesResults in
-            self?.searchResults = imagesResults
-            self?.applySnapshot()
+        serverService.searchImages(for: searchString) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let imagesResults):
+                self.searchResults = imagesResults
+                self.applySnapshot()
+            case .failure(let error):
+                self.showErrorAlert(for: error)
+            }
         }
+    }
+    
+    private func showErrorAlert(for error: Error) {
+        coordinator?.showErrorAlert(message: error.localizedDescription)
     }
 }
 
@@ -95,17 +116,6 @@ extension SearchImageController: UICollectionViewDelegate {
 // MARK: - UISearchBarDelegate
 
 extension SearchImageController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        timer?.invalidate()
-//        timer = Timer.scheduledTimer(
-//            withTimeInterval: 2,
-//            repeats: false,
-//            block: { [weak self] _ in
-//                self?.fetchImages(for: searchText)
-//            }
-//        )
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text,
            !searchText.isEmpty {

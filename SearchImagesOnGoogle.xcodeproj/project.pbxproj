@@ -22,6 +22,8 @@
 		B5985B202940A82D003F5B0F /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B1F2940A82D003F5B0F /* JSONService.swift */; };
 		B5985B232940A88B003F5B0F /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B222940A88B003F5B0F /* ApiService.swift */; };
 		B5985B252940AAA4003F5B0F /* ApiServiceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B242940AAA4003F5B0F /* ApiServiceModels.swift */; };
+		B5985B2D2942EE9C003F5B0F /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B2C2942EE9C003F5B0F /* CoordinatorProtocol.swift */; };
+		B5985B2F2942EEB3003F5B0F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5985B2E2942EEB3003F5B0F /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		B5985B1F2940A82D003F5B0F /* JSONService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
 		B5985B222940A88B003F5B0F /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		B5985B242940AAA4003F5B0F /* ApiServiceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceModels.swift; sourceTree = "<group>"; };
+		B5985B2C2942EE9C003F5B0F /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		B5985B2E2942EEB3003F5B0F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,11 +92,11 @@
 		B570AC39293DB4500094FA5D /* SearchImagesOnGoogle */ = {
 			isa = PBXGroup;
 			children = (
+				B5985B2A2942EE5B003F5B0F /* BusinessLogic */,
 				B570AC95293F05720094FA5D /* Common */,
 				B570AC50293DBFF00094FA5D /* Presentation */,
 				B570ACAD29405F740094FA5D /* Services */,
 				B570AC4F293DBF870094FA5D /* Sources */,
-				B570AC4E293DBF7E0094FA5D /* UIApllication */,
 				B570AC48293DB4510094FA5D /* Info.plist */,
 			);
 			path = SearchImagesOnGoogle;
@@ -233,6 +237,24 @@
 				B5985B242940AAA4003F5B0F /* ApiServiceModels.swift */,
 			);
 			path = ApiService;
+			sourceTree = "<group>";
+		};
+		B5985B2A2942EE5B003F5B0F /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				B570AC4E293DBF7E0094FA5D /* UIApllication */,
+				B5985B2B2942EE6D003F5B0F /* Coordinator */,
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		B5985B2B2942EE6D003F5B0F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B5985B2C2942EE9C003F5B0F /* CoordinatorProtocol.swift */,
+				B5985B2E2942EEB3003F5B0F /* Coordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		ECF939105B1CBE113EFB6535 /* Frameworks */ = {
@@ -401,6 +423,8 @@
 			files = (
 				B570AC9D293F08760094FA5D /* UICollectionView+Extensions.swift in Sources */,
 				B5985B202940A82D003F5B0F /* JSONService.swift in Sources */,
+				B5985B2F2942EEB3003F5B0F /* Coordinator.swift in Sources */,
+				B5985B2D2942EE9C003F5B0F /* CoordinatorProtocol.swift in Sources */,
 				B570AC58293DC0500094FA5D /* SearchImageView.swift in Sources */,
 				B570AC9B293F07670094FA5D /* ImagesCollectionCell.swift in Sources */,
 				B5985B252940AAA4003F5B0F /* ApiServiceModels.swift in Sources */,

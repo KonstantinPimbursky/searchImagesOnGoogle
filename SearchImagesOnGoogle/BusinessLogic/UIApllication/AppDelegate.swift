@@ -11,13 +11,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var coordinator: Coordinator?
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let navigationController = UINavigationController(rootViewController: SearchImageController())
+        
+        let navigationController = UINavigationController()
+        coordinator = Coordinator(navigationController: navigationController)
+        let searchController = SearchImageController(coordinator: coordinator)
+        navigationController.viewControllers = [searchController]
+        
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
