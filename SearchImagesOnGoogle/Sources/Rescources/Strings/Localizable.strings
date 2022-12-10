@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  SearchImagesOnGoogle
+
+  Created by Konstantin Pimbursky on 07.12.2022.
+  
+*/
+
+// Search Screen
+
+"searchPlaceholder" = "Search";
+
+// Alerts
+
+"errorTitle" = "Error";
