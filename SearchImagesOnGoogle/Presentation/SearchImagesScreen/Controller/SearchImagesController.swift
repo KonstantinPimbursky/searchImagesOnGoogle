@@ -1,5 +1,5 @@
 //
-//  SearchImageController.swift
+//  SearchImagesController.swift
 //  SearchImagesOnGoogle
 //
 //  Created by Konstantin Pimbursky on 05.12.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchImageController: UIViewController {
+final class SearchImagesController: UIViewController {
     
     // MARK: - Types
     
@@ -50,11 +50,35 @@ final class SearchImageController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = R.string.localizable.searchTitle()
         setupImagesCollection()
         applySnapshot()
+        addTestButton()
     }
     
     // MARK: - Private Methods
+    
+    private func addTestButton() {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .gray
+        button.setTitle("test button", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.addTarget(self, action: #selector(testButtonAction), for: .touchUpInside)
+        
+        mainView.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
+            button.heightAnchor.constraint(equalToConstant: 50),
+            button.widthAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+    
+    @objc private func testButtonAction() {
+        coordinator?.openSingleImageScreen(imagesResults: searchResults.results, selectedIndex: 1)
+    }
     
     private func setupImagesCollection() {
         mainView.imagesCollection.delegate = self
@@ -99,7 +123,7 @@ final class SearchImageController: UIViewController {
 
 // MARK: - SearchImageViewDelegate
 
-extension SearchImageController: SearchImageViewDelegate {
+extension SearchImagesController: SearchImageViewDelegate {
     func setupNavigationBar(searchBar: UISearchBar) {
         searchBar.delegate = self
         let searchItem = UIBarButtonItem(customView: searchBar)
@@ -109,13 +133,15 @@ extension SearchImageController: SearchImageViewDelegate {
 
 // MARK: - UICollectionViewDelegate
 
-extension SearchImageController: UICollectionViewDelegate {
-    
+extension SearchImagesController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.openSingleImageScreen(imagesResults: searchResults.results, selectedIndex: indexPath.item)
+    }
 }
 
 // MARK: - UISearchBarDelegate
 
-extension SearchImageController: UISearchBarDelegate {
+extension SearchImagesController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text,
            !searchText.isEmpty {

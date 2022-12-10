@@ -10,8 +10,12 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    // MARK: - Public Properties
+    
     var window: UIWindow?
     var coordinator: Coordinator?
+    
+    // MARK: - Public Methods
 
     func application(
         _ application: UIApplication,
@@ -19,13 +23,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let navigationController = UINavigationController()
+        let navigationController = createNavigationController()
         coordinator = Coordinator(navigationController: navigationController)
-        let searchController = SearchImageController(coordinator: coordinator)
+        let searchController = SearchImagesController(coordinator: coordinator)
         navigationController.viewControllers = [searchController]
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    // MARK: - Private Methods
+    
+    private func createNavigationController() -> UINavigationController {
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.tintColor = .systemGray2
+        return navigationController
     }
 }

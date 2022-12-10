@@ -19,6 +19,7 @@ final class SearchImageView: UIView {
         let layout = createCollectionLayout()
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = .clear
         collection.register(cell: ImagesCollectionCell.self)
         return collection
     }()
@@ -35,6 +36,8 @@ final class SearchImageView: UIView {
             )
         )
         searchBar.placeholder = R.string.localizable.searchPlaceholder()
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .white
         return searchBar
     }()
     
@@ -43,7 +46,7 @@ final class SearchImageView: UIView {
     init(delegate: SearchImageViewDelegate?) {
         self.delegate = delegate
         super.init(frame: .zero)
-        backgroundColor = .white
+        backgroundColor = R.color.backgroundColor()
         addSubviews()
         setConstraints()
         setupNavigationBar()
