@@ -20,4 +20,5 @@ protocol CoordinatorProtocol: AnyObject {
     // MARK: - Public Methods
     
     func showErrorAlert(message: String)
+    func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int)
 }

@@ -21,11 +21,6 @@ final class Coordinator: CoordinatorProtocol {
     
     // MARK: - Public Methods
     
-    public func start() {
-        let searchController = SearchImageController(coordinator: self)
-        navigationController.viewControllers = [searchController]
-    }
-    
     public func showErrorAlert(
         message: String
     ) {
@@ -37,6 +32,14 @@ final class Coordinator: CoordinatorProtocol {
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         presentController(controller: alert, animated: true)
+    }
+    
+    public func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int) {
+        let singleImageScreen = SingleImageScreenController(
+            imagesResults: imagesResults,
+            selectedIndex: selectedIndex
+        )
+        pushController(controller: singleImageScreen, animated: true)
     }
     
     // MARK: - Private Methods

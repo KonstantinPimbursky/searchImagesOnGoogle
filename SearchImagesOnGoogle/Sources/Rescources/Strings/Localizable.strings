@@ -9,7 +9,12 @@
 // Search Screen
 
 "searchPlaceholder" = "Search";
+"searchTitle" = "Search";
 
 // Alerts
 
 "errorTitle" = "Error";
+
+// Single Image Screen
+
+"openSourcePage" = "Open source page";
