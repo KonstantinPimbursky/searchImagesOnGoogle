@@ -115,8 +115,8 @@ final class SingleImageScreenView: UIView {
         button.setImage(type.icon, for: .normal)
         button.setTitle(type.title, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .systemGray2
-        button.setTitleColor(.systemGray3, for: .normal)
+        button.tintColor = .white
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }

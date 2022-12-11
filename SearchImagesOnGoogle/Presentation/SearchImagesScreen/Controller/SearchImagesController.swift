@@ -50,31 +50,12 @@ final class SearchImagesController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = R.string.localizable.searchTitle()
+        navigationItem.backButtonDisplayMode = .minimal
         setupImagesCollection()
         applySnapshot()
-        addTestButton()
     }
     
     // MARK: - Private Methods
-    
-    private func addTestButton() {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .gray
-        button.setTitle("test button", for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.addTarget(self, action: #selector(testButtonAction), for: .touchUpInside)
-        
-        mainView.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
-            button.heightAnchor.constraint(equalToConstant: 50),
-            button.widthAnchor.constraint(equalToConstant: 100)
-        ])
-    }
     
     @objc private func testButtonAction() {
         coordinator?.openSingleImageScreen(imagesResults: searchResults.results, selectedIndex: 1)

@@ -15,6 +15,8 @@ final class SingleImageScreenController: UIViewController {
     
     // MARK: - Private Properties
     
+    private weak var coordinator: CoordinatorProtocol?
+    
     private lazy var mainView = SingleImageScreenView(delegate: self)
     
     private let imagesResults: [SingleImageResult]
@@ -31,10 +33,15 @@ final class SingleImageScreenController: UIViewController {
     
     // MARK: - Initializers
     
-    init(imagesResults: [SingleImageResult], selectedIndex: Int) {
+    init(
+        imagesResults: [SingleImageResult],
+        selectedIndex: Int,
+        coordinator: CoordinatorProtocol?
+    ) {
         self.imagesResults = imagesResults
         self.selectedIndex = selectedIndex
         self.currentPageNumber = selectedIndex
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,6 +57,7 @@ final class SingleImageScreenController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backButtonDisplayMode = .minimal
         setupPageController()
     }
     
@@ -101,7 +109,7 @@ extension SingleImageScreenController: SingleImageScreenViewDelegate {
     }
     
     func openSourcePageButtonAction() {
-        print("Open Source Page")
+        coordinator?.openWebScreen(urlString: imagesResults[currentPageNumber].link)
     }
 }
 

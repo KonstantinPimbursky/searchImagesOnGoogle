@@ -11,6 +11,8 @@
 		B53C8AD029447D3600E759AF /* SingleImagePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8ACF29447D3600E759AF /* SingleImagePageController.swift */; };
 		B53C8AD229447D4000E759AF /* SingleImagePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8AD129447D4000E759AF /* SingleImagePageView.swift */; };
 		B53C8AD42944E0BD00E759AF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8AD32944E0BD00E759AF /* UIViewController+Extensions.swift */; };
+		B53C8AD92945BCFC00E759AF /* WebScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8AD82945BCFC00E759AF /* WebScreenController.swift */; };
+		B53C8ADB2945BD8100E759AF /* WebScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8ADA2945BD8100E759AF /* WebScreenView.swift */; };
 		B570AC3B293DB4500094FA5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570AC3A293DB4500094FA5D /* AppDelegate.swift */; };
 		B570AC44293DB4510094FA5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B570AC43293DB4510094FA5D /* Assets.xcassets */; };
 		B570AC47293DB4510094FA5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B570AC45293DB4510094FA5D /* LaunchScreen.storyboard */; };
@@ -38,6 +40,8 @@
 		B53C8ACF29447D3600E759AF /* SingleImagePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImagePageController.swift; sourceTree = "<group>"; };
 		B53C8AD129447D4000E759AF /* SingleImagePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImagePageView.swift; sourceTree = "<group>"; };
 		B53C8AD32944E0BD00E759AF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		B53C8AD82945BCFC00E759AF /* WebScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScreenController.swift; sourceTree = "<group>"; };
+		B53C8ADA2945BD8100E759AF /* WebScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScreenView.swift; sourceTree = "<group>"; };
 		B570AC37293DB4500094FA5D /* SearchImagesOnGoogle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchImagesOnGoogle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B570AC3A293DB4500094FA5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B570AC43293DB4510094FA5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,6 +118,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B53C8AD52945BC8700E759AF /* WebScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B53C8AD62945BCE600E759AF /* Controller */,
+				B53C8AD72945BCEC00E759AF /* View */,
+			);
+			path = WebScreen;
+			sourceTree = "<group>";
+		};
+		B53C8AD62945BCE600E759AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B53C8AD82945BCFC00E759AF /* WebScreenController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B53C8AD72945BCEC00E759AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B53C8ADA2945BD8100E759AF /* WebScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B570AC2E293DB4500094FA5D = {
 			isa = PBXGroup;
 			children = (
@@ -165,8 +194,9 @@
 		B570AC50293DBFF00094FA5D /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B5985B35294302FF003F5B0F /* SingleImageScreen */,
 				B570AC52293DC0140094FA5D /* SearchImagesScreen */,
+				B5985B35294302FF003F5B0F /* SingleImageScreen */,
+				B53C8AD52945BC8700E759AF /* WebScreen */,
 				B570AC51293DBFFC0094FA5D /* LaunchScreen */,
 			);
 			path = Presentation;
@@ -492,6 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B53C8AD92945BCFC00E759AF /* WebScreenController.swift in Sources */,
 				B53C8AD029447D3600E759AF /* SingleImagePageController.swift in Sources */,
 				B5985B3B29430338003F5B0F /* SingleImageScreenView.swift in Sources */,
 				B570AC9D293F08760094FA5D /* UICollectionView+Extensions.swift in Sources */,
@@ -506,6 +537,7 @@
 				B5985B232940A88B003F5B0F /* ApiService.swift in Sources */,
 				B5985B392943032E003F5B0F /* SingleImageScreenController.swift in Sources */,
 				B570AC3B293DB4500094FA5D /* AppDelegate.swift in Sources */,
+				B53C8ADB2945BD8100E759AF /* WebScreenView.swift in Sources */,
 				B570AC98293F058E0094FA5D /* UIView+Extensions.swift in Sources */,
 				B570AC56293DC0460094FA5D /* SearchImagesController.swift in Sources */,
 				B570AC94293EFFC80094FA5D /* R.generated.swift in Sources */,
