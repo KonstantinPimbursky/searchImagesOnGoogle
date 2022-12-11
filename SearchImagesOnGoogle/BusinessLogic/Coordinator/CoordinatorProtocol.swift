@@ -21,4 +21,5 @@ protocol CoordinatorProtocol: AnyObject {
     
     func showErrorAlert(message: String)
     func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int)
+    func openWebScreen(urlString: String)
 }

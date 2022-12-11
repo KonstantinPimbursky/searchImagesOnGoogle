@@ -37,9 +37,15 @@ final class Coordinator: CoordinatorProtocol {
     public func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int) {
         let singleImageScreen = SingleImageScreenController(
             imagesResults: imagesResults,
-            selectedIndex: selectedIndex
+            selectedIndex: selectedIndex,
+            coordinator: self
         )
         pushController(controller: singleImageScreen, animated: true)
+    }
+    
+    public func openWebScreen(urlString: String) {
+        let webScreenController = WebScreenController(urlString: urlString)
+        pushController(controller: webScreenController, animated: true)
     }
     
     // MARK: - Private Methods

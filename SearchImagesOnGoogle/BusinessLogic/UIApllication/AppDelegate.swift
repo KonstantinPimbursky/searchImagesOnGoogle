@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        window?.overrideUserInterfaceStyle = .dark
         return true
     }
     

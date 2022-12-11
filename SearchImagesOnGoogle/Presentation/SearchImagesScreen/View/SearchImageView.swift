@@ -36,8 +36,6 @@ final class SearchImageView: UIView {
             )
         )
         searchBar.placeholder = R.string.localizable.searchPlaceholder()
-        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = .white
         return searchBar
     }()
     
