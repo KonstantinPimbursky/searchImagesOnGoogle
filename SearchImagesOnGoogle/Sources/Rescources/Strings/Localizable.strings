@@ -8,12 +8,18 @@
 
 // Search Screen
 
-"searchPlaceholder" = "Search";
-"searchTitle" = "Search";
+"search" = "Search";
+
+// Tools Screen
+
+"tools" = "Tools";
+"country" = "Country";
+"language" = "Language";
+"size" = "Size";
 
 // Alerts
 
-"errorTitle" = "Error";
+"error" = "Error";
 
 // Single Image Screen
 

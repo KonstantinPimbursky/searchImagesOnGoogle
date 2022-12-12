@@ -25,13 +25,18 @@ final class Coordinator: CoordinatorProtocol {
         message: String
     ) {
         let alert = UIAlertController(
-            title: R.string.localizable.errorTitle(),
+            title: R.string.localizable.error(),
             message: message,
             preferredStyle: .alert
         )
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         presentController(controller: alert, animated: true)
+    }
+    
+    public func openToolsScreen() {
+        let toolsScreen = ToolsScreenController()
+        presentController(controller: toolsScreen, animated: true)
     }
     
     public func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int) {

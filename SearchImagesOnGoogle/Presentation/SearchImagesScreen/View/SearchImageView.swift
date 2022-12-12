@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchImageViewDelegate: AnyObject {
-    func setupNavigationBar(searchBar: UISearchBar)
+    func setupNavigationBar(searchBar: SearchBarView)
 }
 
 final class SearchImageView: UIView {
@@ -28,16 +28,18 @@ final class SearchImageView: UIView {
     
     private weak var delegate: SearchImageViewDelegate?
     
-    private let searchBar: UISearchBar = {
-        let searchBar = UISearchBar(
-            frame: CGRect(
-                origin: CGPoint(x: 0, y: 0),
-                size: CGSize(width: UIScreen.main.bounds.width - 2 * 16, height: 20)
-            )
-        )
-        searchBar.placeholder = R.string.localizable.searchPlaceholder()
-        return searchBar
-    }()
+//    private let searchBar: UISearchBar = {
+//        let searchBar = UISearchBar(
+//            frame: CGRect(
+//                origin: CGPoint(x: 0, y: 0),
+//                size: CGSize(width: UIScreen.main.bounds.width - 2 * 16, height: 20)
+//            )
+//        )
+//        searchBar.placeholder = R.string.localizable.searchPlaceholder()
+//        return searchBar
+//    }()
+    
+    private let searchBar = SearchBarView()
     
     // MARK: - Initializers
     

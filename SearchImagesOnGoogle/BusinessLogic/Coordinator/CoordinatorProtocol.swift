@@ -20,6 +20,7 @@ protocol CoordinatorProtocol: AnyObject {
     // MARK: - Public Methods
     
     func showErrorAlert(message: String)
+    func openToolsScreen()
     func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int)
     func openWebScreen(urlString: String)
 }

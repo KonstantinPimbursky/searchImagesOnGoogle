@@ -105,10 +105,18 @@ final class SearchImagesController: UIViewController {
 // MARK: - SearchImageViewDelegate
 
 extension SearchImagesController: SearchImageViewDelegate {
-    func setupNavigationBar(searchBar: UISearchBar) {
+    func setupNavigationBar(searchBar: SearchBarView) {
         searchBar.delegate = self
         let searchItem = UIBarButtonItem(customView: searchBar)
         navigationItem.leftBarButtonItem = searchItem
+    }
+}
+
+// MARK: - SearchBarViewDelegate
+
+extension SearchImagesController: SearchBarViewDelegate {
+    func toolsButtonAction() {
+        coordinator?.openToolsScreen()
     }
 }
 
