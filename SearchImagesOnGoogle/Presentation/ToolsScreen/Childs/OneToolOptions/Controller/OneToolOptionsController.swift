@@ -18,8 +18,21 @@ final class OneToolOptionsController: UIViewController {
     
     private let mainView = OneToolOptionsView()
     
+    private let model: [String]
+    
     private var dataSource: DataSource!
     private var snapShot: DataSourceSnapshot!
+    
+    // MARK: - Initializers
+    
+    init(model: [String]) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -30,6 +43,7 @@ final class OneToolOptionsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createDataSource()
+        applySnapShot()
     }
     
     // MARK: - Private Methods
@@ -38,12 +52,17 @@ final class OneToolOptionsController: UIViewController {
         dataSource = DataSource(
             collectionView: mainView.collection,
             cellProvider: { collectionView, indexPath, item in
-                <#code#>
+                let cell: OneToolOptionsCell = collectionView.dequeueCell(for: indexPath)
+                cell.configure(title: item)
+                return cell
             }
         )
     }
     
     private func applySnapShot() {
-        
+        snapShot = DataSourceSnapshot()
+        snapShot.appendSections([0])
+        snapShot.appendItems(model)
+        dataSource.apply(snapShot, animatingDifferences: false)
     }
 }

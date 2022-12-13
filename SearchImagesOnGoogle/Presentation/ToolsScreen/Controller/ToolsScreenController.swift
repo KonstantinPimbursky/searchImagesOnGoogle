@@ -11,18 +11,22 @@ final class ToolsScreenController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let mainView = ToolsScreenView()
+    private lazy var mainView = ToolsScreenView(delegate: self)
     
     private let jsonService = JSONService.shared
     
+    private let toolsModel: ToolsTableModel = ToolsTableModelImpl()
+    
     private var googleCountries = GoogleCountries(countries: [])
+    
+    private var googleLanguages = GoogleLanguages(languages: [])
     
     private let pageController = UIPageViewController(
         transitionStyle: .scroll,
         navigationOrientation: .horizontal
     )
     
-    private let toolOptionsController = ToolsTable()
+    private lazy var toolOptionsController = ToolsTable(model: toolsModel, delegate: self)
     
     // MARK: - Life Cycle
     
@@ -33,6 +37,7 @@ final class ToolsScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getGoogleCountries()
+        getGoogleLanguages()
         setupPageController()
     }
     
@@ -47,8 +52,47 @@ final class ToolsScreenController: UIViewController {
         googleCountries = countries
     }
     
+    private func getGoogleLanguages() {
+        guard
+            let filePath = Bundle.main.path(forResource: "GoogleLanguages", ofType: "json"),
+            let fileData = FileManager.default.contents(atPath: filePath),
+            let languages = jsonService.decodeJSON(type: GoogleLanguages.self, from: fileData)
+        else { return }
+        googleLanguages = languages
+    }
+    
     private func setupPageController() {
         addChild(controller: pageController, rootView: mainView.pageContainer)
         pageController.setViewControllers([toolOptionsController], direction: .forward, animated: false)
+    }
+}
+
+// MARK: - ToolsScreenViewDelegate
+
+extension ToolsScreenController: ToolsScreenViewDelegate {
+    func backButtonAction() {
+        mainView.changeTitle(type: .tools)
+        pageController.setViewControllers([toolOptionsController], direction: .reverse, animated: true)
+    }
+}
+
+// MARK: - ToolsTableDelegate
+
+extension ToolsScreenController: ToolsTableDelegate {
+    func toolsTable(didSelectItemAt indexPath: IndexPath) {
+        switch toolsModel.cell(at: indexPath).type {
+        case .size:
+            print("Size")
+        case .country:
+            mainView.changeTitle(type: .country)
+            let countries = googleCountries.countries.map { $0.countryName }
+            let countryTool = OneToolOptionsController(model: countries)
+            pageController.setViewControllers([countryTool], direction: .forward, animated: true)
+        case .language:
+            mainView.changeTitle(type: .language)
+            let languages = googleLanguages.languages.map { $0.languageName }
+            let languageTool = OneToolOptionsController(model: languages)
+            pageController.setViewControllers([languageTool], direction: .forward, animated: true)
+        }
     }
 }

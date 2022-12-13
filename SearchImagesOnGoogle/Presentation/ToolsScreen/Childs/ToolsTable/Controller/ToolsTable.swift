@@ -7,13 +7,31 @@
 
 import UIKit
 
+protocol ToolsTableDelegate: AnyObject {
+    func toolsTable(didSelectItemAt indexPath: IndexPath)
+}
+
 final class ToolsTable: UIViewController {
     
     // MARK: - Private Properties
     
+    private weak var delegate: ToolsTableDelegate?
+    
     private let mainView = ToolOptionsView()
     
-    private let model: ToolsTableModel = ToolsTableModelImpl()
+    private let model: ToolsTableModel
+    
+    // MARK: - Initializers
+    
+    init(model: ToolsTableModel, delegate: ToolsTableDelegate?) {
+        self.model = model
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -68,6 +86,6 @@ extension ToolsTable: UITableViewDataSource {
 extension ToolsTable: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        delegate?.toolsTable(didSelectItemAt: indexPath)
     }
 }

@@ -29,7 +29,7 @@ final class ToolOptionsView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerCurve = .continuous
         button.layer.cornerRadius = 8
-        button.layer.borderColor = UIColor.white.withAlphaComponent(0.16).cgColor
+        button.layer.borderColor = R.color.purple()?.cgColor
         button.layer.borderWidth = 2
         button.backgroundColor = R.color.buttonColor()
         button.setTitle(R.string.localizable.apply(), for: .normal)

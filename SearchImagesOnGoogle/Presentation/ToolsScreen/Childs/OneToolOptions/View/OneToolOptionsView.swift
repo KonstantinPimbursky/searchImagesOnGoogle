@@ -17,18 +17,25 @@ final class OneToolOptionsView: UIView {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.showsVerticalScrollIndicator = false
         collection.showsHorizontalScrollIndicator = false
+        collection.register(cell: OneToolOptionsCell.self)
+        collection.allowsSelection = true
+        collection.allowsMultipleSelection = false
+        collection.backgroundColor = .clear
+        collection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 68, right: 0)
         return collection
     }()
     
     // MARK: - Private Properties
     
     private let applyButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerCurve = .continuous
         button.layer.cornerRadius = 8
-        button.layer.borderColor = UIColor.white.withAlphaComponent(0.16).cgColor
+        button.layer.borderColor = R.color.purple()?.cgColor
         button.layer.borderWidth = 2
+        button.backgroundColor = R.color.buttonColor()
+        button.setTitle(R.string.localizable.apply(), for: .normal)
         return button
     }()
     
