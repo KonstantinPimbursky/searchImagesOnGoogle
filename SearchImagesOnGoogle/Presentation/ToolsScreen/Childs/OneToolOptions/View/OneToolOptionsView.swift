@@ -1,13 +1,13 @@
 //
-//  ToolOptionsView.swift
+//  OneToolOptionsView.swift
 //  SearchImagesOnGoogle
 //
-//  Created by Konstantin Pimbursky on 12.12.2022.
+//  Created by Konstantin Pimbursky on 13.12.2022.
 //
 
 import UIKit
 
-final class ToolOptionsView: UIView {
+final class OneToolOptionsView: UIView {
     
     // MARK: - Public Properties
     
@@ -55,7 +55,7 @@ final class ToolOptionsView: UIView {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: itemSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }

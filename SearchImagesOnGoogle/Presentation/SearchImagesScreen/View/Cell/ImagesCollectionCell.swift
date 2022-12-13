@@ -37,6 +37,7 @@ final class ImagesCollectionCell: UICollectionViewCell {
     
     public func configure(with imageURL: String) {
         guard let url = URL(string: imageURL) else { return }
+        imageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
         imageView.sd_setImage(with: url, completed: nil)
     }
     

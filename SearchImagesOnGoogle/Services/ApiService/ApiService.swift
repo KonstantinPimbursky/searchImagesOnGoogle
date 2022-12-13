@@ -35,7 +35,6 @@ final class ApiService {
             switch result {
             case .success(let data):
                 guard let response = self?.jsonService.decodeJSON(type: ImagesResults.self, from: data) else { return }
-                print(response)
                 completion(.success(response))
             case .failure(let error):
                 completion(.failure(error))

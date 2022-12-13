@@ -17,6 +17,13 @@ final class ToolsScreenController: UIViewController {
     
     private var googleCountries = GoogleCountries(countries: [])
     
+    private let pageController = UIPageViewController(
+        transitionStyle: .scroll,
+        navigationOrientation: .horizontal
+    )
+    
+    private let toolOptionsController = ToolsTable()
+    
     // MARK: - Life Cycle
     
     override func loadView() {
@@ -26,6 +33,7 @@ final class ToolsScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getGoogleCountries()
+        setupPageController()
     }
     
     // MARK: - Private Methods
@@ -37,5 +45,10 @@ final class ToolsScreenController: UIViewController {
             let countries = jsonService.decodeJSON(type: GoogleCountries.self, from: fileData)
         else { return }
         googleCountries = countries
+    }
+    
+    private func setupPageController() {
+        addChild(controller: pageController, rootView: mainView.pageContainer)
+        pageController.setViewControllers([toolOptionsController], direction: .forward, animated: false)
     }
 }

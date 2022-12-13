@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		11B6BD7E3FF206CB3F9546D2 /* Pods_SearchImagesOnGoogle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0985FBC4C7FDA15350A5E6FF /* Pods_SearchImagesOnGoogle.framework */; };
+		B50B8B012947880100010EC8 /* ToolsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B8B002947880100010EC8 /* ToolsTableCell.swift */; };
+		B50B8B032948387A00010EC8 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B8B022948387A00010EC8 /* UITableView+Extensions.swift */; };
+		B50B8B082948496300010EC8 /* OneToolOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B8B072948496300010EC8 /* OneToolOptionsController.swift */; };
+		B50B8B0A2948497600010EC8 /* OneToolOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B8B092948497600010EC8 /* OneToolOptionsView.swift */; };
+		B50B8B0D29484A2500010EC8 /* OneToolOptionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B8B0C29484A2500010EC8 /* OneToolOptionsModel.swift */; };
+		B50B8B1029484C8300010EC8 /* OneToolOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B8B0F29484C8300010EC8 /* OneToolOptionsCell.swift */; };
 		B53C8AD029447D3600E759AF /* SingleImagePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8ACF29447D3600E759AF /* SingleImagePageController.swift */; };
 		B53C8AD229447D4000E759AF /* SingleImagePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8AD129447D4000E759AF /* SingleImagePageView.swift */; };
 		B53C8AD42944E0BD00E759AF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C8AD32944E0BD00E759AF /* UIViewController+Extensions.swift */; };
@@ -36,17 +42,21 @@
 		B5B8724B29465FF30039577A /* GoogleCountries.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B8724A29465FF30039577A /* GoogleCountries.json */; };
 		B5B8724D294663AD0039577A /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8724C294663AD0039577A /* SearchBarView.swift */; };
 		B5B872512946717C0039577A /* GoogleLanguages.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B872502946717B0039577A /* GoogleLanguages.json */; };
-		B5B872562946731C0039577A /* ToolOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B872552946731C0039577A /* ToolOptionsController.swift */; };
+		B5B872562946731C0039577A /* ToolsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B872552946731C0039577A /* ToolsTable.swift */; };
 		B5B872582946732A0039577A /* ToolOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B872572946732A0039577A /* ToolOptionsView.swift */; };
-		B5B8725A294673340039577A /* ToolOptionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B87259294673340039577A /* ToolOptionsModel.swift */; };
-		B5B8726029467C910039577A /* ToolsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8725F29467C910039577A /* ToolsTableController.swift */; };
-		B5B8726429467CFC0039577A /* ToolsTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8726329467CFC0039577A /* ToolsTableModel.swift */; };
+		B5B8725A294673340039577A /* ToolsTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B87259294673340039577A /* ToolsTableModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0985FBC4C7FDA15350A5E6FF /* Pods_SearchImagesOnGoogle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchImagesOnGoogle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5783AB3066B86B4DA65F94F5 /* Pods-SearchImagesOnGoogle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchImagesOnGoogle.debug.xcconfig"; path = "Target Support Files/Pods-SearchImagesOnGoogle/Pods-SearchImagesOnGoogle.debug.xcconfig"; sourceTree = "<group>"; };
 		940FDD0CF3A18FF5722FC275 /* Pods-SearchImagesOnGoogle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchImagesOnGoogle.release.xcconfig"; path = "Target Support Files/Pods-SearchImagesOnGoogle/Pods-SearchImagesOnGoogle.release.xcconfig"; sourceTree = "<group>"; };
+		B50B8B002947880100010EC8 /* ToolsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableCell.swift; sourceTree = "<group>"; };
+		B50B8B022948387A00010EC8 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		B50B8B072948496300010EC8 /* OneToolOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToolOptionsController.swift; sourceTree = "<group>"; };
+		B50B8B092948497600010EC8 /* OneToolOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToolOptionsView.swift; sourceTree = "<group>"; };
+		B50B8B0C29484A2500010EC8 /* OneToolOptionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToolOptionsModel.swift; sourceTree = "<group>"; };
+		B50B8B0F29484C8300010EC8 /* OneToolOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneToolOptionsCell.swift; sourceTree = "<group>"; };
 		B53C8ACF29447D3600E759AF /* SingleImagePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImagePageController.swift; sourceTree = "<group>"; };
 		B53C8AD129447D4000E759AF /* SingleImagePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImagePageView.swift; sourceTree = "<group>"; };
 		B53C8AD32944E0BD00E759AF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -77,11 +87,9 @@
 		B5B8724A29465FF30039577A /* GoogleCountries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoogleCountries.json; sourceTree = "<group>"; };
 		B5B8724C294663AD0039577A /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B5B872502946717B0039577A /* GoogleLanguages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoogleLanguages.json; sourceTree = "<group>"; };
-		B5B872552946731C0039577A /* ToolOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOptionsController.swift; sourceTree = "<group>"; };
+		B5B872552946731C0039577A /* ToolsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTable.swift; sourceTree = "<group>"; };
 		B5B872572946732A0039577A /* ToolOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOptionsView.swift; sourceTree = "<group>"; };
-		B5B87259294673340039577A /* ToolOptionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOptionsModel.swift; sourceTree = "<group>"; };
-		B5B8725F29467C910039577A /* ToolsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableController.swift; sourceTree = "<group>"; };
-		B5B8726329467CFC0039577A /* ToolsTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableModel.swift; sourceTree = "<group>"; };
+		B5B87259294673340039577A /* ToolsTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,57 @@
 				940FDD0CF3A18FF5722FC275 /* Pods-SearchImagesOnGoogle.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B50B8AFF294787EF00010EC8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B50B8B002947880100010EC8 /* ToolsTableCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		B50B8B042948493700010EC8 /* OneToolOptions */ = {
+			isa = PBXGroup;
+			children = (
+				B50B8B062948495100010EC8 /* Controller */,
+				B50B8B0B29484A1600010EC8 /* Model */,
+				B50B8B052948494C00010EC8 /* View */,
+			);
+			path = OneToolOptions;
+			sourceTree = "<group>";
+		};
+		B50B8B052948494C00010EC8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B50B8B0E29484C7500010EC8 /* Cell */,
+				B50B8B092948497600010EC8 /* OneToolOptionsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B50B8B062948495100010EC8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B50B8B072948496300010EC8 /* OneToolOptionsController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B50B8B0B29484A1600010EC8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B50B8B0C29484A2500010EC8 /* OneToolOptionsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B50B8B0E29484C7500010EC8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B50B8B0F29484C8300010EC8 /* OneToolOptionsCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B53C8ACB29447CE500E759AF /* Childs */ = {
@@ -306,6 +365,7 @@
 				B570AC9C293F08760094FA5D /* UICollectionView+Extensions.swift */,
 				B570AC97293F058E0094FA5D /* UIView+Extensions.swift */,
 				B53C8AD32944E0BD00E759AF /* UIViewController+Extensions.swift */,
+				B50B8B022948387A00010EC8 /* UITableView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -419,26 +479,26 @@
 		B5B8724E2946704E0039577A /* Childs */ = {
 			isa = PBXGroup;
 			children = (
-				B5B8725B294677C10039577A /* ToolsTable */,
-				B5B8724F2946706E0039577A /* ToolOptions */,
+				B50B8B042948493700010EC8 /* OneToolOptions */,
+				B5B8724F2946706E0039577A /* ToolsTable */,
 			);
 			path = Childs;
 			sourceTree = "<group>";
 		};
-		B5B8724F2946706E0039577A /* ToolOptions */ = {
+		B5B8724F2946706E0039577A /* ToolsTable */ = {
 			isa = PBXGroup;
 			children = (
 				B5B87252294672EE0039577A /* Controller */,
 				B5B872542946730A0039577A /* Model */,
 				B5B87253294672FB0039577A /* View */,
 			);
-			path = ToolOptions;
+			path = ToolsTable;
 			sourceTree = "<group>";
 		};
 		B5B87252294672EE0039577A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B5B872552946731C0039577A /* ToolOptionsController.swift */,
+				B5B872552946731C0039577A /* ToolsTable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -446,6 +506,7 @@
 		B5B87253294672FB0039577A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B50B8AFF294787EF00010EC8 /* Cell */,
 				B5B872572946732A0039577A /* ToolOptionsView.swift */,
 			);
 			path = View;
@@ -454,32 +515,7 @@
 		B5B872542946730A0039577A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B5B87259294673340039577A /* ToolOptionsModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		B5B8725B294677C10039577A /* ToolsTable */ = {
-			isa = PBXGroup;
-			children = (
-				B5B8725D29467C740039577A /* Model */,
-				B5B8725C29467C6B0039577A /* Controller */,
-			);
-			path = ToolsTable;
-			sourceTree = "<group>";
-		};
-		B5B8725C29467C6B0039577A /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B5B8725F29467C910039577A /* ToolsTableController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		B5B8725D29467C740039577A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B5B8726329467CFC0039577A /* ToolsTableModel.swift */,
+				B5B87259294673340039577A /* ToolsTableModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -654,23 +690,26 @@
 				B53C8AE0294659B100E759AF /* ToolsScreenController.swift in Sources */,
 				B53C8AD029447D3600E759AF /* SingleImagePageController.swift in Sources */,
 				B5985B3B29430338003F5B0F /* SingleImageScreenView.swift in Sources */,
-				B5B8725A294673340039577A /* ToolOptionsModel.swift in Sources */,
+				B5B8725A294673340039577A /* ToolsTableModel.swift in Sources */,
 				B53C8AE2294659C000E759AF /* ToolsScreenView.swift in Sources */,
-				B5B8726429467CFC0039577A /* ToolsTableModel.swift in Sources */,
 				B570AC9D293F08760094FA5D /* UICollectionView+Extensions.swift in Sources */,
 				B5B8724D294663AD0039577A /* SearchBarView.swift in Sources */,
+				B50B8B012947880100010EC8 /* ToolsTableCell.swift in Sources */,
 				B5985B202940A82D003F5B0F /* JSONService.swift in Sources */,
 				B53C8AD42944E0BD00E759AF /* UIViewController+Extensions.swift in Sources */,
+				B50B8B082948496300010EC8 /* OneToolOptionsController.swift in Sources */,
 				B5985B2F2942EEB3003F5B0F /* Coordinator.swift in Sources */,
 				B5985B2D2942EE9C003F5B0F /* CoordinatorProtocol.swift in Sources */,
 				B570AC58293DC0500094FA5D /* SearchImageView.swift in Sources */,
-				B5B872562946731C0039577A /* ToolOptionsController.swift in Sources */,
+				B50B8B0D29484A2500010EC8 /* OneToolOptionsModel.swift in Sources */,
+				B50B8B032948387A00010EC8 /* UITableView+Extensions.swift in Sources */,
+				B5B872562946731C0039577A /* ToolsTable.swift in Sources */,
 				B570AC9B293F07670094FA5D /* ImagesCollectionCell.swift in Sources */,
 				B5985B252940AAA4003F5B0F /* ApiServiceModels.swift in Sources */,
-				B5B8726029467C910039577A /* ToolsTableController.swift in Sources */,
 				B570ACB029405FB80094FA5D /* NetworkService.swift in Sources */,
 				B5985B232940A88B003F5B0F /* ApiService.swift in Sources */,
 				B5985B392943032E003F5B0F /* SingleImageScreenController.swift in Sources */,
+				B50B8B0A2948497600010EC8 /* OneToolOptionsView.swift in Sources */,
 				B570AC3B293DB4500094FA5D /* AppDelegate.swift in Sources */,
 				B53C8ADB2945BD8100E759AF /* WebScreenView.swift in Sources */,
 				B570AC98293F058E0094FA5D /* UIView+Extensions.swift in Sources */,
@@ -678,6 +717,7 @@
 				B570AC94293EFFC80094FA5D /* R.generated.swift in Sources */,
 				B53C8AD229447D4000E759AF /* SingleImagePageView.swift in Sources */,
 				B5B872582946732A0039577A /* ToolOptionsView.swift in Sources */,
+				B50B8B1029484C8300010EC8 /* OneToolOptionsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

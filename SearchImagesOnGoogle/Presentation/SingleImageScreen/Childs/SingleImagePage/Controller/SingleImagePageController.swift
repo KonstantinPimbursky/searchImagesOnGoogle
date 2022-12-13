@@ -47,6 +47,7 @@ final class SingleImagePageController: UIViewController, SingleImagePageProtocol
     
     private func loadImage() {
         guard let url = URL(string: image.original) else { return }
+        mainView.imageView.sd_imageIndicator = SDWebImageActivityIndicator.large
         mainView.imageView.sd_setImage(with: url)
     }
 }

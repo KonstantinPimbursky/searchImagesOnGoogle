@@ -9,7 +9,22 @@ import UIKit
 
 final class ToolsScreenView: UIView {
     
+    // MARK: - Public Properties
+    
+    public let pageContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Private Properties
+    
+    private let topBackgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = R.color.buttonColor()
+        return view
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -36,13 +51,27 @@ final class ToolsScreenView: UIView {
     // MARK: - Private Methods
     
     private func addSubviews() {
-        addSubview(titleLabel)
+        [
+            topBackgroundView,
+            titleLabel,
+            pageContainer
+        ].forEach { addSubview($0) }
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
+            topBackgroundView.topAnchor.constraint(equalTo: topAnchor),
+            topBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            topBackgroundView.heightAnchor.constraint(equalToConstant: 44),
+            
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            pageContainer.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor),
+            pageContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pageContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            pageContainer.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
