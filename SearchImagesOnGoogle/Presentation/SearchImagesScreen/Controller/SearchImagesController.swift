@@ -134,6 +134,7 @@ final class SearchImagesController: UIViewController {
         guard !searchText.isEmpty else { return }
         searchResults = ImagesResults(results: [])
         applySnapshot()
+        mainView.startActivity(true)
         serverService.searchImages(
             for: .init(
                 searchText: searchText,
@@ -143,6 +144,7 @@ final class SearchImagesController: UIViewController {
             ),
             completion: { [weak self] result in
                 guard let self = self else { return }
+                self.mainView.startActivity(false)
                 switch result {
                 case .success(let imagesResults):
                     self.searchResults = imagesResults

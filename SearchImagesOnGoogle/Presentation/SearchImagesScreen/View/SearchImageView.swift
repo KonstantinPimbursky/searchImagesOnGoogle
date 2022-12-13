@@ -39,6 +39,12 @@ final class SearchImageView: UIView {
         return view
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
+    
     // MARK: - Initializers
     
     init(delegate: SearchImageViewDelegate?) {
@@ -58,6 +64,11 @@ final class SearchImageView: UIView {
     
     public func keyboard(isShown: Bool) {
         tapView.isHidden = !isShown
+    }
+    
+    public func startActivity(_ isActive: Bool) {
+        // swiftlint:disable:next void_function_in_ternary
+        isActive ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
     
     // MARK: - Actions
@@ -86,11 +97,14 @@ final class SearchImageView: UIView {
     }
     
     private func addSubviews() {
-        addSubview(imagesCollection)
-        addSubview(tapView)
+        [activityIndicator, imagesCollection, tapView].forEach { addSubview($0) }
     }
     
     private func setConstraints() {
+        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
         imagesCollection.stretchFullOn(self)
         tapView.stretchFullOn(self)
     }
