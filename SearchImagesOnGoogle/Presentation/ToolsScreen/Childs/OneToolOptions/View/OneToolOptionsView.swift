@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol OneToolOptionsViewDelegate: AnyObject {
+    func applyButtonAction()
+}
+
 final class OneToolOptionsView: UIView {
     
     // MARK: - Public Properties
@@ -27,7 +31,9 @@ final class OneToolOptionsView: UIView {
     
     // MARK: - Private Properties
     
-    private let applyButton: UIButton = {
+    private weak var delegate: OneToolOptionsViewDelegate?
+    
+    private lazy var applyButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerCurve = .continuous
@@ -36,12 +42,14 @@ final class OneToolOptionsView: UIView {
         button.layer.borderWidth = 2
         button.backgroundColor = R.color.buttonColor()
         button.setTitle(R.string.localizable.apply(), for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
     
     // MARK: - Initializers
     
-    init() {
+    init(delegate: OneToolOptionsViewDelegate?) {
+        self.delegate = delegate
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
@@ -49,6 +57,12 @@ final class OneToolOptionsView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func buttonAction(_ sender: UIButton) {
+        delegate?.applyButtonAction()
     }
     
     // MARK: - Private Methods

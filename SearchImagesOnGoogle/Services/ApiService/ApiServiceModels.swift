@@ -83,3 +83,31 @@ struct GoogleLanguage: Codable {
     let languageCode: String
     let languageName: String
 }
+
+enum GoogleImageSize: CaseIterable {
+    case large
+    case medium
+    case icon
+    
+    var sizeCode: String {
+        switch self {
+        case .large:
+            return "l"
+        case .medium:
+            return "m"
+        case .icon:
+            return "i"
+        }
+    }
+    
+    var sizeName: String {
+        switch self {
+        case .large:
+            return R.string.localizable.large()
+        case .medium:
+            return R.string.localizable.medium()
+        case .icon:
+            return R.string.localizable.icon()
+        }
+    }
+}

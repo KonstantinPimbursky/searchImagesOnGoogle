@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol OneToolOptionsControllerDelegate: AnyObject {
+    func oneToolOptions(applied selectedIndexPaths: [IndexPath]?)
+}
+
 final class OneToolOptionsController: UIViewController {
     
     // MARK: - Types
@@ -16,17 +20,23 @@ final class OneToolOptionsController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let mainView = OneToolOptionsView()
+    private weak var delegate: OneToolOptionsControllerDelegate?
+    
+    private lazy var mainView = OneToolOptionsView(delegate: self)
     
     private let model: [String]
+    
+    private var initialSelectedIndex: Int?
     
     private var dataSource: DataSource!
     private var snapShot: DataSourceSnapshot!
     
     // MARK: - Initializers
     
-    init(model: [String]) {
+    init(model: [String], selectedIndex: Int?, delegate: OneToolOptionsControllerDelegate?) {
         self.model = model
+        self.initialSelectedIndex = selectedIndex
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,6 +54,14 @@ final class OneToolOptionsController: UIViewController {
         super.viewDidLoad()
         createDataSource()
         applySnapShot()
+        selectItem()
+    }
+    
+    // MARK: - Public Methods
+    
+    public func resetSelection() {
+        guard let selectedIndexPaths = mainView.collection.indexPathsForSelectedItems else { return }
+        selectedIndexPaths.forEach { mainView.collection.deselectItem(at: $0, animated: true) }
     }
     
     // MARK: - Private Methods
@@ -64,5 +82,18 @@ final class OneToolOptionsController: UIViewController {
         snapShot.appendSections([0])
         snapShot.appendItems(model)
         dataSource.apply(snapShot, animatingDifferences: false)
+    }
+    
+    private func selectItem() {
+        guard let index = initialSelectedIndex else { return }
+        mainView.collection.selectItem(at: IndexPath(item: index, section: 0), animated: false, scrollPosition: .top)
+    }
+}
+
+// MARK: - OneToolOptionsViewDelegate
+
+extension OneToolOptionsController: OneToolOptionsViewDelegate {
+    func applyButtonAction() {
+        delegate?.oneToolOptions(applied: mainView.collection.indexPathsForSelectedItems)
     }
 }

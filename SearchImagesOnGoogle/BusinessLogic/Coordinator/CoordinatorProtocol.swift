@@ -20,7 +20,13 @@ protocol CoordinatorProtocol: AnyObject {
     // MARK: - Public Methods
     
     func showErrorAlert(message: String)
-    func openToolsScreen()
+    func openToolsScreen(
+        imageSize: GoogleImageSize?,
+        country: GoogleCountry?,
+        language: GoogleLanguage?,
+        delegate: ToolsScreenControllerDelegate?
+    )
+    func closeToolsScreen()
     func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int)
     func openWebScreen(urlString: String)
 }

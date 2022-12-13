@@ -17,6 +17,10 @@
 "language" = "Language";
 "size" = "Size";
 "apply" = "Apply";
+"reset" = "Reset";
+"large" = "Large";
+"medium" = "Medium";
+"icon" = "Icons";
 
 // Alerts
 

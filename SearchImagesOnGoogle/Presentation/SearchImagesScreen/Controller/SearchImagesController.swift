@@ -26,6 +26,14 @@ final class SearchImagesController: UIViewController {
     
     private let serverService = ApiService.shared
     
+    private var searchText: String = ""
+    
+    private var imageSize: GoogleImageSize?
+    
+    private var country: GoogleCountry?
+    
+    private var language: GoogleLanguage?
+    
     private var searchResults = ImagesResults(results: [])
     
     private var dataSource: DataSource!
@@ -53,12 +61,50 @@ final class SearchImagesController: UIViewController {
         navigationItem.backButtonDisplayMode = .minimal
         setupImagesCollection()
         applySnapshot()
+        registerForKeyboardNotifications()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeKeyboardObservers()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func kBWillShow(_ notification: Notification) {
+        mainView.keyboard(isShown: true)
+    }
+    
+    @objc private func kBWillHide() {
+        mainView.keyboard(isShown: false)
     }
     
     // MARK: - Private Methods
     
-    @objc private func testButtonAction() {
-        coordinator?.openSingleImageScreen(imagesResults: searchResults.results, selectedIndex: 1)
+    private func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(kBWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(kBWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
+    }
+    
+    private func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     private func setupImagesCollection() {
@@ -84,17 +130,28 @@ final class SearchImagesController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
-    private func fetchImages(for searchString: String) {
-        serverService.searchImages(for: searchString) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let imagesResults):
-                self.searchResults = imagesResults
-                self.applySnapshot()
-            case .failure(let error):
-                self.showErrorAlert(for: error)
+    private func fetchImages() {
+        guard !searchText.isEmpty else { return }
+        searchResults = ImagesResults(results: [])
+        applySnapshot()
+        serverService.searchImages(
+            for: .init(
+                searchText: searchText,
+                imageSize: imageSize,
+                country: country,
+                language: language
+            ),
+            completion: { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let imagesResults):
+                    self.searchResults = imagesResults
+                    self.applySnapshot()
+                case .failure(let error):
+                    self.showErrorAlert(for: error)
+                }
             }
-        }
+        )
     }
     
     private func showErrorAlert(for error: Error) {
@@ -116,7 +173,12 @@ extension SearchImagesController: SearchImageViewDelegate {
 
 extension SearchImagesController: SearchBarViewDelegate {
     func toolsButtonAction() {
-        coordinator?.openToolsScreen()
+        coordinator?.openToolsScreen(
+            imageSize: imageSize,
+            country: country,
+            language: language,
+            delegate: self
+        )
     }
 }
 
@@ -134,8 +196,21 @@ extension SearchImagesController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text,
            !searchText.isEmpty {
-            fetchImages(for: searchText)
+            self.searchText = searchText
+            fetchImages()
         }
         searchBar.resignFirstResponder()
+    }
+}
+
+// MARK: - ToolsScreenControllerDelegate
+
+extension SearchImagesController: ToolsScreenControllerDelegate {
+    func toolsApplied(imageSize: GoogleImageSize?, country: GoogleCountry?, language: GoogleLanguage?) {
+        self.imageSize = imageSize
+        self.country = country
+        self.language = language
+        fetchImages()
+        coordinator?.closeToolsScreen()
     }
 }

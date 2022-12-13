@@ -34,9 +34,23 @@ final class Coordinator: CoordinatorProtocol {
         presentController(controller: alert, animated: true)
     }
     
-    public func openToolsScreen() {
-        let toolsScreen = ToolsScreenController()
+    public func openToolsScreen(
+        imageSize: GoogleImageSize?,
+        country: GoogleCountry?,
+        language: GoogleLanguage?,
+        delegate: ToolsScreenControllerDelegate?
+    ) {
+        let toolsScreen = ToolsScreenController(
+            imageSize: imageSize,
+            country: country,
+            language: language,
+            delegate: delegate
+        )
         presentController(controller: toolsScreen, animated: true)
+    }
+    
+    public func closeToolsScreen() {
+        dismissController(animated: true)
     }
     
     public func openSingleImageScreen(imagesResults: [SingleImageResult], selectedIndex: Int) {

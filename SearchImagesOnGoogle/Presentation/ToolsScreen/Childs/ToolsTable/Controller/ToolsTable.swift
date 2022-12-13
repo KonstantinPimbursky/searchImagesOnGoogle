@@ -9,6 +9,7 @@ import UIKit
 
 protocol ToolsTableDelegate: AnyObject {
     func toolsTable(didSelectItemAt indexPath: IndexPath)
+    func toolsTableApplied()
 }
 
 final class ToolsTable: UIViewController {
@@ -17,9 +18,9 @@ final class ToolsTable: UIViewController {
     
     private weak var delegate: ToolsTableDelegate?
     
-    private let mainView = ToolOptionsView()
+    private lazy var mainView = ToolsTableView(delegate: self)
     
-    private let model: ToolsTableModel
+    private var model: ToolsTableModel
     
     // MARK: - Initializers
     
@@ -44,6 +45,13 @@ final class ToolsTable: UIViewController {
         setupTableView()
     }
     
+    // MARK: - Public Methods
+    
+    public func reloadTable(model: ToolsTableModel) {
+        self.model = model
+        mainView.table.reloadData()
+    }
+    
     // MARK: - Private Methods
     
     private func setupTableView() {
@@ -60,6 +68,14 @@ final class ToolsTable: UIViewController {
             result += item
         }
         return result
+    }
+}
+
+// MARK: - ToolOptionsViewDelegate
+
+extension ToolsTable: ToolsTableViewDelegate {
+    func applyButtonAction() {
+        delegate?.toolsTableApplied()
     }
 }
 

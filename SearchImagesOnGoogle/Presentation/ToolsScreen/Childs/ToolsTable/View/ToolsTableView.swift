@@ -1,5 +1,5 @@
 //
-//  ToolOptionsView.swift
+//  ToolsTableView.swift
 //  SearchImagesOnGoogle
 //
 //  Created by Konstantin Pimbursky on 12.12.2022.
@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class ToolOptionsView: UIView {
+protocol ToolsTableViewDelegate: AnyObject {
+    func applyButtonAction()
+}
+
+final class ToolsTableView: UIView {
     
     // MARK: - Public Properties
     
@@ -24,7 +28,9 @@ final class ToolOptionsView: UIView {
     
     // MARK: - Private Properties
     
-    private let applyButton: UIButton = {
+    private weak var delegate: ToolsTableViewDelegate?
+    
+    private lazy var applyButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerCurve = .continuous
@@ -33,12 +39,14 @@ final class ToolOptionsView: UIView {
         button.layer.borderWidth = 2
         button.backgroundColor = R.color.buttonColor()
         button.setTitle(R.string.localizable.apply(), for: .normal)
+        button.addTarget(self, action: #selector(applyButtonAction), for: .touchUpInside)
         return button
     }()
     
     // MARK: - Initializers
     
-    init() {
+    init(delegate: ToolsTableViewDelegate?) {
+        self.delegate = delegate
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
@@ -46,6 +54,12 @@ final class ToolOptionsView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func applyButtonAction() {
+        delegate?.applyButtonAction()
     }
     
     // MARK: - Private Methods

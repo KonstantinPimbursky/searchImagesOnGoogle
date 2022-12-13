@@ -9,6 +9,7 @@ import UIKit
 
 protocol ToolsScreenViewDelegate: AnyObject {
     func backButtonAction()
+    func resetButtonAction()
 }
 
 final class ToolsScreenView: UIView {
@@ -52,6 +53,8 @@ final class ToolsScreenView: UIView {
         return view
     }()
     
+    public var currentTitleType: TitleType = .tools
+    
     // MARK: - Private Properties
     
     private weak var delegate: ToolsScreenViewDelegate?
@@ -78,7 +81,17 @@ final class ToolsScreenView: UIView {
         button.setImage(R.image.chevronLeft(), for: .normal)
         button.alpha = 0
         button.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
-        button.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var resetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.alpha = 0
+        button.setTitle(R.string.localizable.reset(), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
     
@@ -99,17 +112,25 @@ final class ToolsScreenView: UIView {
     // MARK: - Public Methods
     
     public func changeTitle(type: TitleType) {
+        currentTitleType = type
         UIView.animate(withDuration: 0.3) { [self] in
             titleLabel.text = type.title
             backButton.alpha = type.showBackButton ? 1 : 0
+            resetButton.alpha = type.showBackButton ? 1 : 0
         }
     }
     
     // MARK: - Actions
     
-    @objc private func backButtonAction() {
-        delegate?.backButtonAction()
-    }
+    @objc private func buttonAction(_ sender: UIButton) {
+        switch sender {
+        case backButton:
+            delegate?.backButtonAction()
+        case resetButton:
+            delegate?.resetButtonAction()
+        default:
+            break
+        }    }
     
     // MARK: - Private Methods
     
@@ -118,6 +139,7 @@ final class ToolsScreenView: UIView {
             topBackgroundView,
             backButton,
             titleLabel,
+            resetButton,
             pageContainer
         ].forEach { addSubview($0) }
     }
@@ -134,8 +156,11 @@ final class ToolsScreenView: UIView {
             backButton.widthAnchor.constraint(equalToConstant: 30),
             backButton.heightAnchor.constraint(equalToConstant: 30),
             
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            titleLabel.centerYAnchor.constraint(equalTo: topBackgroundView.centerYAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            resetButton.centerYAnchor.constraint(equalTo: topBackgroundView.centerYAnchor),
+            resetButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             pageContainer.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor),
             pageContainer.leadingAnchor.constraint(equalTo: leadingAnchor),

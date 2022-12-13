@@ -43,7 +43,7 @@
 		B5B8724D294663AD0039577A /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8724C294663AD0039577A /* SearchBarView.swift */; };
 		B5B872512946717C0039577A /* GoogleLanguages.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B872502946717B0039577A /* GoogleLanguages.json */; };
 		B5B872562946731C0039577A /* ToolsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B872552946731C0039577A /* ToolsTable.swift */; };
-		B5B872582946732A0039577A /* ToolOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B872572946732A0039577A /* ToolOptionsView.swift */; };
+		B5B872582946732A0039577A /* ToolsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B872572946732A0039577A /* ToolsTableView.swift */; };
 		B5B8725A294673340039577A /* ToolsTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B87259294673340039577A /* ToolsTableModel.swift */; };
 		B5F38C2D2948DAC700ED7A86 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F38C2C2948DAC700ED7A86 /* SelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -89,7 +89,7 @@
 		B5B8724C294663AD0039577A /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B5B872502946717B0039577A /* GoogleLanguages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoogleLanguages.json; sourceTree = "<group>"; };
 		B5B872552946731C0039577A /* ToolsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTable.swift; sourceTree = "<group>"; };
-		B5B872572946732A0039577A /* ToolOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOptionsView.swift; sourceTree = "<group>"; };
+		B5B872572946732A0039577A /* ToolsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableView.swift; sourceTree = "<group>"; };
 		B5B87259294673340039577A /* ToolsTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableModel.swift; sourceTree = "<group>"; };
 		B5F38C2C2948DAC700ED7A86 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -510,7 +510,7 @@
 			isa = PBXGroup;
 			children = (
 				B50B8AFF294787EF00010EC8 /* Cell */,
-				B5B872572946732A0039577A /* ToolOptionsView.swift */,
+				B5B872572946732A0039577A /* ToolsTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -719,7 +719,7 @@
 				B570AC56293DC0460094FA5D /* SearchImagesController.swift in Sources */,
 				B570AC94293EFFC80094FA5D /* R.generated.swift in Sources */,
 				B53C8AD229447D4000E759AF /* SingleImagePageView.swift in Sources */,
-				B5B872582946732A0039577A /* ToolOptionsView.swift in Sources */,
+				B5B872582946732A0039577A /* ToolsTableView.swift in Sources */,
 				B50B8B1029484C8300010EC8 /* OneToolOptionsCell.swift in Sources */,
 				B5F38C2D2948DAC700ED7A86 /* SelectionView.swift in Sources */,
 			);

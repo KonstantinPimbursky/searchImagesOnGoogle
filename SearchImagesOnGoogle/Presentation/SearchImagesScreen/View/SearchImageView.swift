@@ -28,18 +28,16 @@ final class SearchImageView: UIView {
     
     private weak var delegate: SearchImageViewDelegate?
     
-//    private let searchBar: UISearchBar = {
-//        let searchBar = UISearchBar(
-//            frame: CGRect(
-//                origin: CGPoint(x: 0, y: 0),
-//                size: CGSize(width: UIScreen.main.bounds.width - 2 * 16, height: 20)
-//            )
-//        )
-//        searchBar.placeholder = R.string.localizable.searchPlaceholder()
-//        return searchBar
-//    }()
-    
     private let searchBar = SearchBarView()
+    
+    private lazy var tapView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        view.addGestureRecognizer(tapGesture)
+        view.isHidden = true
+        return view
+    }()
     
     // MARK: - Initializers
     
@@ -54,6 +52,18 @@ final class SearchImageView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Public Methods
+    
+    public func keyboard(isShown: Bool) {
+        tapView.isHidden = !isShown
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func didTap() {
+        searchBar.resignFirstResponder()
     }
     
     // MARK: - Private Methods
@@ -77,10 +87,12 @@ final class SearchImageView: UIView {
     
     private func addSubviews() {
         addSubview(imagesCollection)
+        addSubview(tapView)
     }
     
     private func setConstraints() {
         imagesCollection.stretchFullOn(self)
+        tapView.stretchFullOn(self)
     }
     
     private func setupNavigationBar() {
