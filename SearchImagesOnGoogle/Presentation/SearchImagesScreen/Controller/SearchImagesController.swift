@@ -24,17 +24,7 @@ final class SearchImagesController: UIViewController {
     
     private lazy var mainView = SearchImageView(delegate: self)
     
-    private let serverService = ApiService.shared
-    
-    private var searchText: String = ""
-    
-    private var imageSize: GoogleImageSize?
-    
-    private var country: GoogleCountry?
-    
-    private var language: GoogleLanguage?
-    
-    private var searchResults = ImagesResults(results: [])
+    private var model: SearchImagesModel = SearchImagesModelImpl()
     
     private var dataSource: DataSource!
     private var snapshot: DataSourceSnapshot!
@@ -108,6 +98,7 @@ final class SearchImagesController: UIViewController {
     }
     
     private func setupImagesCollection() {
+        mainView.imagesCollection.prefetchDataSource = self
         mainView.imagesCollection.delegate = self
         createCollectionDataSource()
     }
@@ -126,34 +117,29 @@ final class SearchImagesController: UIViewController {
     private func applySnapshot() {
         snapshot = DataSourceSnapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(searchResults.results)
+        snapshot.appendItems(model.searchResults)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
-    private func fetchImages() {
-        guard !searchText.isEmpty else { return }
-        searchResults = ImagesResults(results: [])
-        applySnapshot()
+    private func searchImages() {
         mainView.startActivity(true)
-        serverService.searchImages(
-            for: .init(
-                searchText: searchText,
-                imageSize: imageSize,
-                country: country,
-                language: language
-            ),
-            completion: { [weak self] result in
-                guard let self = self else { return }
-                self.mainView.startActivity(false)
-                switch result {
-                case .success(let imagesResults):
-                    self.searchResults = imagesResults
-                    self.applySnapshot()
-                case .failure(let error):
-                    self.showErrorAlert(for: error)
-                }
+        model.searchImages { [weak self] isSuccess, error in
+            if isSuccess {
+                self?.applySnapshot()
+            } else if let error = error {
+                self?.showErrorAlert(for: error)
             }
-        )
+        }
+    }
+    
+    private func fetchImages() {
+        model.fetchNextPageOfImages { [weak self] isSuccess, error in
+            if isSuccess {
+                self?.applySnapshot()
+            } else if let error = error {
+                self?.showErrorAlert(for: error)
+            }
+        }
     }
     
     private func showErrorAlert(for error: Error) {
@@ -176,11 +162,28 @@ extension SearchImagesController: SearchImageViewDelegate {
 extension SearchImagesController: SearchBarViewDelegate {
     func toolsButtonAction() {
         coordinator?.openToolsScreen(
-            imageSize: imageSize,
-            country: country,
-            language: language,
+            imageSize: model.searchParameters.imageSize,
+            country: model.searchParameters.country,
+            language: model.searchParameters.language,
             delegate: self
         )
+    }
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+
+extension SearchImagesController: UICollectionViewDataSourcePrefetching {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        prefetchItemsAt indexPaths: [IndexPath]
+    ) {
+        print("========")
+        for indexPath in indexPaths {
+            print("Prefetching: \(indexPath.item)")
+        }
+        if indexPaths.contains(where: { $0.item >= model.searchResults.count - 1 }) {
+            fetchImages()
+        }
     }
 }
 
@@ -188,7 +191,7 @@ extension SearchImagesController: SearchBarViewDelegate {
 
 extension SearchImagesController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.openSingleImageScreen(imagesResults: searchResults.results, selectedIndex: indexPath.item)
+        coordinator?.openSingleImageScreen(imagesResults: model.searchResults, selectedIndex: indexPath.item)
     }
 }
 
@@ -198,8 +201,8 @@ extension SearchImagesController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text,
            !searchText.isEmpty {
-            self.searchText = searchText
-            fetchImages()
+            model.searchParameters.searchText = searchText
+            searchImages()
         }
         searchBar.resignFirstResponder()
     }
@@ -209,10 +212,10 @@ extension SearchImagesController: UISearchBarDelegate {
 
 extension SearchImagesController: ToolsScreenControllerDelegate {
     func toolsApplied(imageSize: GoogleImageSize?, country: GoogleCountry?, language: GoogleLanguage?) {
-        self.imageSize = imageSize
-        self.country = country
-        self.language = language
-        fetchImages()
+        model.searchParameters.imageSize = imageSize
+        model.searchParameters.country = country
+        model.searchParameters.language = language
+        searchImages()
         coordinator?.closeToolsScreen()
     }
 }

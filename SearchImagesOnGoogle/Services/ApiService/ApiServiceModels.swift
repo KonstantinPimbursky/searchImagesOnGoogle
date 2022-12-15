@@ -111,3 +111,11 @@ enum GoogleImageSize: CaseIterable {
         }
     }
 }
+
+struct SearchParameters {
+    var searchText: String
+    var paginationPage: Int
+    var imageSize: GoogleImageSize?
+    var country: GoogleCountry?
+    var language: GoogleLanguage?
+}

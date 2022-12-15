@@ -9,15 +9,6 @@ import Foundation
 
 final class ApiService {
     
-    // MARK: - Types
-    
-    struct SearchParameters {
-        let searchText: String
-        let imageSize: GoogleImageSize?
-        let country: GoogleCountry?
-        let language: GoogleLanguage?
-    }
-    
     // MARK: - Public Properties
     
     public static let shared = ApiService()
@@ -59,6 +50,7 @@ final class ApiService {
         result["q"] = searchParameters.searchText
         result["google_domain"] = "google.com"
         result["tbm"] = "isch"
+        result["ijn"] = "\(searchParameters.paginationPage)"
         if let country = searchParameters.country {
             result["gl"] = country.countryCode
         }
