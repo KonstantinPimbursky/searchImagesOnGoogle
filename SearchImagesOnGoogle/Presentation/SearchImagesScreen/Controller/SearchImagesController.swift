@@ -122,9 +122,13 @@ final class SearchImagesController: UIViewController {
     }
     
     private func searchImages() {
+        guard !model.searchParameters.searchText.isEmpty else { return }
+        model.searchResults = []
+        applySnapshot()
         mainView.startActivity(true)
         model.searchImages { [weak self] isSuccess, error in
             if isSuccess {
+                self?.mainView.startActivity(false)
                 self?.applySnapshot()
             } else if let error = error {
                 self?.showErrorAlert(for: error)
@@ -152,8 +156,7 @@ final class SearchImagesController: UIViewController {
 extension SearchImagesController: SearchImageViewDelegate {
     func setupNavigationBar(searchBar: SearchBarView) {
         searchBar.delegate = self
-        let searchItem = UIBarButtonItem(customView: searchBar)
-        navigationItem.leftBarButtonItem = searchItem
+        navigationItem.titleView = searchBar
     }
 }
 
@@ -161,12 +164,7 @@ extension SearchImagesController: SearchImageViewDelegate {
 
 extension SearchImagesController: SearchBarViewDelegate {
     func toolsButtonAction() {
-        coordinator?.openToolsScreen(
-            imageSize: model.searchParameters.imageSize,
-            country: model.searchParameters.country,
-            language: model.searchParameters.language,
-            delegate: self
-        )
+        coordinator?.openToolsScreen(searchParameters: model.searchParameters, delegate: self)
     }
 }
 
@@ -177,10 +175,6 @@ extension SearchImagesController: UICollectionViewDataSourcePrefetching {
         _ collectionView: UICollectionView,
         prefetchItemsAt indexPaths: [IndexPath]
     ) {
-        print("========")
-        for indexPath in indexPaths {
-            print("Prefetching: \(indexPath.item)")
-        }
         if indexPaths.contains(where: { $0.item >= model.searchResults.count - 1 }) {
             fetchImages()
         }
@@ -211,10 +205,8 @@ extension SearchImagesController: UISearchBarDelegate {
 // MARK: - ToolsScreenControllerDelegate
 
 extension SearchImagesController: ToolsScreenControllerDelegate {
-    func toolsApplied(imageSize: GoogleImageSize?, country: GoogleCountry?, language: GoogleLanguage?) {
-        model.searchParameters.imageSize = imageSize
-        model.searchParameters.country = country
-        model.searchParameters.language = language
+    func toolsApplied(searchParameters: SearchParameters) {
+        model.searchParameters = searchParameters
         searchImages()
         coordinator?.closeToolsScreen()
     }

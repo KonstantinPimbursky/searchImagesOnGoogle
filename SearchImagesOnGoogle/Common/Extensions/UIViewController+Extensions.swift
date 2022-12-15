@@ -8,7 +8,11 @@
 import UIKit
 
 extension UIViewController {
-    func addChild (controller: UIViewController, rootView: UIView) {
+    /// Добавляет child-контроллер
+    /// - Parameters:
+    ///   - controller: контроллер, который необходимо добавить в качестве child
+    ///   - rootView: view, в которую необходимо добавить контроллер в качестве child
+    func addChild(controller: UIViewController, rootView: UIView) {
         addChild(controller)
         rootView.addSubview(controller.view)
         controller.view.translatesAutoresizingMaskIntoConstraints = false

@@ -62,6 +62,8 @@ final class SearchImageView: UIView {
     
     // MARK: - Public Methods
     
+    /// Добавляет вью для распознавания тапа, чтобы закрыть клавиатуру по тапу на свободном месте
+    /// - Parameter isShown: флаг, отображается ли клавиатура на экране
     public func keyboard(isShown: Bool) {
         tapView.isHidden = !isShown
     }
@@ -105,7 +107,7 @@ final class SearchImageView: UIView {
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
-        imagesCollection.stretchFullOn(self)
+        imagesCollection.stretchFullSafelyOn(self)
         tapView.stretchFullOn(self)
     }
     

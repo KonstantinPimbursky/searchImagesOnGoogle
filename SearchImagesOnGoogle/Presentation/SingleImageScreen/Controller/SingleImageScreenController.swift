@@ -66,7 +66,11 @@ final class SingleImageScreenController: UIViewController {
     private func setupPageController() {
         pageController.dataSource = self
         
-        let page = SingleImagePageController(imageIndex: selectedIndex, image: imagesResults[selectedIndex])
+        let page = SingleImagePageController(
+            imageIndex: selectedIndex,
+            image: imagesResults[selectedIndex],
+            coordinator: coordinator
+        )
         pageController.setViewControllers([page], direction: .forward, animated: false)
         addChild(controller: pageController, rootView: mainView.pageContainer)
     }
@@ -80,7 +84,11 @@ final class SingleImageScreenController: UIViewController {
         guard index > 0 else { return nil }
         
         currentPageNumber = index - 1
-        let newPage = SingleImagePageController(imageIndex: currentPageNumber, image: imagesResults[currentPageNumber])
+        let newPage = SingleImagePageController(
+            imageIndex: currentPageNumber,
+            image: imagesResults[currentPageNumber],
+            coordinator: coordinator
+        )
         
         return newPage
     }
@@ -89,7 +97,11 @@ final class SingleImageScreenController: UIViewController {
         guard index < imagesResults.count - 1 else { return nil }
         
         currentPageNumber = index + 1
-        let newPage = SingleImagePageController(imageIndex: currentPageNumber, image: imagesResults[currentPageNumber])
+        let newPage = SingleImagePageController(
+            imageIndex: currentPageNumber,
+            image: imagesResults[currentPageNumber],
+            coordinator: coordinator
+        )
         
         return newPage
     }

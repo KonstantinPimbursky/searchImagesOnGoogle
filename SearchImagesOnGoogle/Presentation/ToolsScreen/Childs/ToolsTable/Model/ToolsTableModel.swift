@@ -12,6 +12,10 @@ import UIKit
 protocol ToolsTableModel {
     var numberOfItems: Int { get set }
     var cells: [ToolsTableCellModel] { get set }
+    
+    /// Хелпер, помогает получить ячейку по IndexPath
+    /// - Parameter indexPath: indexPath для ячейки
+    /// - Returns: модель для ячейки по указанному indexPath
     func cell(at indexPath: IndexPath) -> ToolsTableCellModel
 }
 

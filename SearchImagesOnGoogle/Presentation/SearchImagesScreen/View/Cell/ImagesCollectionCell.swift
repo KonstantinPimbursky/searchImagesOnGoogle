@@ -35,14 +35,12 @@ final class ImagesCollectionCell: UICollectionViewCell {
     
     // MARK: - Public Methods
     
+    /// Загружает в ячейку картинку по URL
+    /// - Parameter imageURL: URL-строка, по которой необходимо загрузить картинку
     public func configure(with imageURL: String) {
         guard let url = URL(string: imageURL) else { return }
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
         imageView.sd_setImage(with: url, completed: nil)
-    }
-    
-    public func configure(image: UIImage) {
-        imageView.image = image
     }
     
     // MARK: - Private Methods

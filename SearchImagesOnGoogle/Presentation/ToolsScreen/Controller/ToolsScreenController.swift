@@ -8,11 +8,7 @@
 import UIKit
 
 protocol ToolsScreenControllerDelegate: AnyObject {
-    func toolsApplied(
-        imageSize: GoogleImageSize?,
-        country: GoogleCountry?,
-        language: GoogleLanguage?
-    )
+    func toolsApplied(searchParameters: SearchParameters)
 }
 
 final class ToolsScreenController: UIViewController {
@@ -26,23 +22,14 @@ final class ToolsScreenController: UIViewController {
     private let jsonService = JSONService.shared
     
     private var toolsModel: ToolsTableModel = ToolsTableModelImpl()
-    
+    private var googleCountries = GoogleCountries(countries: [])
+    private var googleLanguages = GoogleLanguages(languages: [])
     private let googleImageSizes = GoogleImageSize.allCases
     
-    private var selectedImageSize: GoogleImageSize?
+    private var searchParameters: SearchParameters
     
     private var selectedImageSizeIndex: Int?
-    
-    private var googleCountries = GoogleCountries(countries: [])
-    
-    private var selectedCountry: GoogleCountry?
-    
     private var selectedCountryIndex: Int?
-    
-    private var googleLanguages = GoogleLanguages(languages: [])
-    
-    private var selectedLanguage: GoogleLanguage?
-    
     private var selectedLanguageIndex: Int?
     
     private let pageController = UIPageViewController(
@@ -57,14 +44,10 @@ final class ToolsScreenController: UIViewController {
     // MARK: - Initializers
     
     init(
-        imageSize: GoogleImageSize?,
-        country: GoogleCountry?,
-        language: GoogleLanguage?,
+        searchParameters: SearchParameters,
         delegate: ToolsScreenControllerDelegate?
     ) {
-        self.selectedImageSize = imageSize
-        self.selectedCountry = country
-        self.selectedLanguage = language
+        self.searchParameters = searchParameters
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,6 +67,7 @@ final class ToolsScreenController: UIViewController {
         getGoogleCountries()
         getGoogleLanguages()
         setupToolsModel()
+        setupSelectedIndexes()
         setupPageController()
     }
     
@@ -116,12 +100,24 @@ final class ToolsScreenController: UIViewController {
         for (index, tool) in toolsModel.cells.enumerated() {
             switch tool.type {
             case .size:
-                toolsModel.cells[index].subtitles = [selectedImageSize?.sizeName ?? ""]
+                toolsModel.cells[index].subtitles = [searchParameters.imageSize?.sizeName ?? ""]
             case .language:
-                toolsModel.cells[index].subtitles = [selectedLanguage?.languageName ?? ""]
+                toolsModel.cells[index].subtitles = [searchParameters.language?.languageName ?? ""]
             case .country:
-                toolsModel.cells[index].subtitles = [selectedCountry?.countryName ?? ""]
+                toolsModel.cells[index].subtitles = [searchParameters.country?.countryName ?? ""]
             }
+        }
+    }
+    
+    private func setupSelectedIndexes() {
+        if let sizeName = searchParameters.imageSize?.sizeName {
+            selectedImageSizeIndex = googleImageSizes.firstIndex(where: { $0.sizeName == sizeName })
+        }
+        if let countryName = searchParameters.country?.countryName {
+            selectedCountryIndex = googleCountries.countries.firstIndex(where: { $0.countryName == countryName })
+        }
+        if let languageName = searchParameters.language?.languageName {
+            selectedLanguageIndex = googleLanguages.languages.firstIndex(where: { $0.languageName == languageName })
         }
     }
 }
@@ -179,11 +175,7 @@ extension ToolsScreenController: ToolsTableDelegate {
     }
     
     func toolsTableApplied() {
-        delegate?.toolsApplied(
-            imageSize: selectedImageSize,
-            country: selectedCountry,
-            language: selectedLanguage
-        )
+        delegate?.toolsApplied(searchParameters: searchParameters)
     }
 }
 
@@ -196,13 +188,13 @@ extension ToolsScreenController: OneToolOptionsControllerDelegate {
             case .tools:
                 break
             case .language:
-                selectedLanguage = googleLanguages.languages[selectedIndex]
+                searchParameters.language = googleLanguages.languages[selectedIndex]
                 selectedLanguageIndex = selectedIndex
             case .country:
-                selectedCountry = googleCountries.countries[selectedIndex]
+                searchParameters.country = googleCountries.countries[selectedIndex]
                 selectedCountryIndex = selectedIndex
             case .size:
-                selectedImageSize = googleImageSizes[selectedIndex]
+                searchParameters.imageSize = googleImageSizes[selectedIndex]
                 selectedImageSizeIndex = selectedIndex
             }
         } else {
@@ -210,13 +202,13 @@ extension ToolsScreenController: OneToolOptionsControllerDelegate {
             case .tools:
                 break
             case .language:
-                selectedLanguage = nil
+                searchParameters.language = nil
                 selectedLanguageIndex = nil
             case .country:
-                selectedCountry = nil
+                searchParameters.country = nil
                 selectedCountryIndex = nil
             case .size:
-                selectedImageSize = nil
+                searchParameters.imageSize = nil
                 selectedImageSizeIndex = nil
             }
         }

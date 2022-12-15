@@ -16,15 +16,18 @@ final class SingleImagePageController: UIViewController, SingleImagePageProtocol
     
     // MARK: - Private Properties
     
+    private weak var coordinator: CoordinatorProtocol?
+    
     private let mainView = SingleImagePageView()
     
     private let image: SingleImageResult
     
     // MARK: - Initializers
     
-    init(imageIndex: Int, image: SingleImageResult) {
+    init(imageIndex: Int, image: SingleImageResult, coordinator: CoordinatorProtocol?) {
         self.imageIndex = imageIndex
         self.image = image
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,6 +51,10 @@ final class SingleImagePageController: UIViewController, SingleImagePageProtocol
     private func loadImage() {
         guard let url = URL(string: image.original) else { return }
         mainView.imageView.sd_imageIndicator = SDWebImageActivityIndicator.large
-        mainView.imageView.sd_setImage(with: url)
+        mainView.imageView.sd_setImage(with: url) { [weak self] _, error, _, _ in
+            if let error = error {
+                self?.coordinator?.showErrorAlert(message: error.localizedDescription)
+            }
+        }
     }
 }

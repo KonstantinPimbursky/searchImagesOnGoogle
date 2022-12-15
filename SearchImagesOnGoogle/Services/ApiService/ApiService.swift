@@ -25,6 +25,10 @@ final class ApiService {
     
     // MARK: - Public Properties
     
+    /// Ищет картинки в Google
+    /// - Parameters:
+    ///   - searchParameters: параметры поиска
+    ///   - completion: замыкание, которое передает результат поиска
     public func searchImages(
         for searchParameters: SearchParameters,
         completion: @escaping (Result<ImagesResults, Error>) -> Void
