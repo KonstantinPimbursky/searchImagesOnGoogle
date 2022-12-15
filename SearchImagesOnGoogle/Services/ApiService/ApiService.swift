@@ -26,16 +26,15 @@ final class ApiService {
     // MARK: - Public Properties
     
     public func searchImages(
-        for searchText: String,
+        for searchParameters: SearchParameters,
         completion: @escaping (Result<ImagesResults, Error>) -> Void
     ) {
-        let parameters = prepareParameters(searchText: searchText)
+        let parameters = prepareParameters(searchParameters: searchParameters)
         guard let url = getSearchUrl(parameters: parameters) else { return }
         networkService.getData(from: url) { [weak self] result in
             switch result {
             case .success(let data):
                 guard let response = self?.jsonService.decodeJSON(type: ImagesResults.self, from: data) else { return }
-                print(response)
                 completion(.success(response))
             case .failure(let error):
                 completion(.failure(error))
@@ -44,13 +43,26 @@ final class ApiService {
     }
     
     // MARK: - Private Properties
-    
-    private func prepareParameters(searchText: String) -> [String: String] {
-        return [
-            "q": searchText,
-            "tbm": "isch",
-            "api_key": ApiComponents.privateKey
-        ]
+
+    private func prepareParameters(searchParameters: SearchParameters) -> [String: String] {
+        var result = [String: String]()
+        result["engine"] = "google"
+        result["q"] = searchParameters.searchText
+        result["google_domain"] = "google.com"
+        result["tbm"] = "isch"
+        result["ijn"] = "\(searchParameters.paginationPage)"
+        if let country = searchParameters.country {
+            result["gl"] = country.countryCode
+        }
+        if let language = searchParameters.language {
+            result["hl"] = language.languageCode
+        }
+        if let imageSize = searchParameters.imageSize {
+            result["tbs"] = imageSize.sizeCode
+        }
+        result["device"] = "mobile"
+        result["api_key"] = ApiComponents.privateKey
+        return result
     }
     
     private func getSearchUrl(parameters: [String: String]) -> URL? {

@@ -64,7 +64,7 @@ final class SingleImageScreenView: UIView {
         button.backgroundColor = R.color.buttonColor()
         button.layer.cornerCurve = .continuous
         button.layer.cornerRadius = 20
-        button.layer.borderColor = UIColor.white.withAlphaComponent(0.16).cgColor
+        button.layer.borderColor = R.color.purple()?.cgColor
         button.layer.borderWidth = 2
         return button
     }()

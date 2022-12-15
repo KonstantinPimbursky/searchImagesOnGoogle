@@ -18,20 +18,11 @@ final class SingleImagePageView: UIView {
         return imageView
     }()
     
-    // MARK: - Private Properties
-    
-    private let activityIndicator: UIActivityIndicatorView = {
-        let activityView = UIActivityIndicatorView()
-        activityView.translatesAutoresizingMaskIntoConstraints = false
-        return activityView
-    }()
-    
     // MARK: - Initializers
     
     init() {
         super.init(frame: .zero)
-        addSubviews()
-        setConstraints()
+        setupImageView()
     }
     
     required init?(coder: NSCoder) {
@@ -40,18 +31,8 @@ final class SingleImagePageView: UIView {
     
     // MARK: - Private Methods
     
-    private func addSubviews() {
-        [
-            activityIndicator,
-            imageView
-        ].forEach { addSubview($0) }
-    }
-    
-    private func setConstraints() {
+    private func setupImageView() {
+        addSubview(imageView)
         imageView.stretchFullSafelyOn(self)
-        NSLayoutConstraint.activate([
-            activityIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
-        ])
     }
 }
