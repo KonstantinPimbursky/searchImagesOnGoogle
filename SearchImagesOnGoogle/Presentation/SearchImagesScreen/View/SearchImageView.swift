@@ -107,7 +107,7 @@ final class SearchImageView: UIView {
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
-        imagesCollection.stretchFullOn(self)
+        imagesCollection.stretchFullSafelyOn(self)
         tapView.stretchFullOn(self)
     }
     

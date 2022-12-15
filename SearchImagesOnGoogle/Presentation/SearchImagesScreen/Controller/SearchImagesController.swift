@@ -122,9 +122,13 @@ final class SearchImagesController: UIViewController {
     }
     
     private func searchImages() {
+        guard !model.searchParameters.searchText.isEmpty else { return }
+        model.searchResults = []
+        applySnapshot()
         mainView.startActivity(true)
         model.searchImages { [weak self] isSuccess, error in
             if isSuccess {
+                self?.mainView.startActivity(false)
                 self?.applySnapshot()
             } else if let error = error {
                 self?.showErrorAlert(for: error)
@@ -152,8 +156,7 @@ final class SearchImagesController: UIViewController {
 extension SearchImagesController: SearchImageViewDelegate {
     func setupNavigationBar(searchBar: SearchBarView) {
         searchBar.delegate = self
-        let searchItem = UIBarButtonItem(customView: searchBar)
-        navigationItem.leftBarButtonItem = searchItem
+        navigationItem.titleView = searchBar
     }
 }
 
