@@ -33,6 +33,6 @@ final class SingleImagePageView: UIView {
     
     private func setupImageView() {
         addSubview(imageView)
-        imageView.stretchFullSafelyOn(self)
+        imageView.stretchFullOn(self, withInsets: UIEdgeInsets(top: 0, left: 48, bottom: 0, right: 48))
     }
 }

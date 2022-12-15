@@ -59,6 +59,7 @@ final class OneToolOptionsController: UIViewController {
     
     // MARK: - Public Methods
     
+    /// Сбрасывает выделение с ячеек
     public func resetSelection() {
         guard let selectedIndexPaths = mainView.collection.indexPathsForSelectedItems else { return }
         selectedIndexPaths.forEach { mainView.collection.deselectItem(at: $0, animated: true) }

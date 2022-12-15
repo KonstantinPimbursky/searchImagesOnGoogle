@@ -10,6 +10,10 @@ import UIKit
 protocol OneToolOptionsModel {
     var numberOfItems: Int { get }
     var cells: [String] { get set }
+    
+    /// Хелпер, помогает получить ячейку по IndexPath
+    /// - Parameter indexPath: indexPath для ячейки
+    /// - Returns: модель для ячейки по указанному indexPath
     func cell(at indexPath: IndexPath) -> String
 }
 

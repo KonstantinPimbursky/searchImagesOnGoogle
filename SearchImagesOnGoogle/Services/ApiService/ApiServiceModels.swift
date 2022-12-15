@@ -84,6 +84,8 @@ struct GoogleLanguage: Codable {
     let languageName: String
 }
 
+// MARK: - GoogleImageSize
+
 enum GoogleImageSize: CaseIterable {
     case large
     case medium
@@ -111,6 +113,8 @@ enum GoogleImageSize: CaseIterable {
         }
     }
 }
+
+// MARK: - SearchParameters
 
 struct SearchParameters {
     var searchText: String

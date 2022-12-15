@@ -161,12 +161,7 @@ extension SearchImagesController: SearchImageViewDelegate {
 
 extension SearchImagesController: SearchBarViewDelegate {
     func toolsButtonAction() {
-        coordinator?.openToolsScreen(
-            imageSize: model.searchParameters.imageSize,
-            country: model.searchParameters.country,
-            language: model.searchParameters.language,
-            delegate: self
-        )
+        coordinator?.openToolsScreen(searchParameters: model.searchParameters, delegate: self)
     }
 }
 
@@ -177,10 +172,6 @@ extension SearchImagesController: UICollectionViewDataSourcePrefetching {
         _ collectionView: UICollectionView,
         prefetchItemsAt indexPaths: [IndexPath]
     ) {
-        print("========")
-        for indexPath in indexPaths {
-            print("Prefetching: \(indexPath.item)")
-        }
         if indexPaths.contains(where: { $0.item >= model.searchResults.count - 1 }) {
             fetchImages()
         }
@@ -211,10 +202,8 @@ extension SearchImagesController: UISearchBarDelegate {
 // MARK: - ToolsScreenControllerDelegate
 
 extension SearchImagesController: ToolsScreenControllerDelegate {
-    func toolsApplied(imageSize: GoogleImageSize?, country: GoogleCountry?, language: GoogleLanguage?) {
-        model.searchParameters.imageSize = imageSize
-        model.searchParameters.country = country
-        model.searchParameters.language = language
+    func toolsApplied(searchParameters: SearchParameters) {
+        model.searchParameters = searchParameters
         searchImages()
         coordinator?.closeToolsScreen()
     }
