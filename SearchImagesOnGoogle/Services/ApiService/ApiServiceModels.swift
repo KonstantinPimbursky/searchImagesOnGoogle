@@ -109,7 +109,7 @@ enum GoogleImageSize: CaseIterable {
         case .medium:
             return R.string.localizable.medium()
         case .icon:
-            return R.string.localizable.icon()
+            return R.string.localizable.icons()
         }
     }
 }

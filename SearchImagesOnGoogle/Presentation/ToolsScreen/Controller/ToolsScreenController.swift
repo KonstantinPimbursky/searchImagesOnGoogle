@@ -67,6 +67,7 @@ final class ToolsScreenController: UIViewController {
         getGoogleCountries()
         getGoogleLanguages()
         setupToolsModel()
+        setupSelectedIndexes()
         setupPageController()
     }
     
@@ -105,6 +106,18 @@ final class ToolsScreenController: UIViewController {
             case .country:
                 toolsModel.cells[index].subtitles = [searchParameters.country?.countryName ?? ""]
             }
+        }
+    }
+    
+    private func setupSelectedIndexes() {
+        if let sizeName = searchParameters.imageSize?.sizeName {
+            selectedImageSizeIndex = googleImageSizes.firstIndex(where: { $0.sizeName == sizeName })
+        }
+        if let countryName = searchParameters.country?.countryName {
+            selectedCountryIndex = googleCountries.countries.firstIndex(where: { $0.countryName == countryName })
+        }
+        if let languageName = searchParameters.language?.languageName {
+            selectedLanguageIndex = googleLanguages.languages.firstIndex(where: { $0.languageName == languageName })
         }
     }
 }
